@@ -1,0 +1,364 @@
+
+/* ------------------------ */
+/* main container            */
+/* -------------------      */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+
+}
+
+
+div.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+
+}
+
+div.row {
+    display: flex;
+    width: 100%;
+    
+}
+
+div.nav-item-row {
+    height: 7%;
+}
+
+
+
+/* ------------------------ */
+/* navegator           */
+/* -------------------      */
+
+
+nav {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    background-color: rgb(42, 42, 42);
+}
+
+div.nav-item {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    color: rgb(189, 189, 189);
+    
+}
+
+
+/* ------------------------ */
+/* log nav items           */
+/* -------------------      */
+
+div.log-in {
+    display: flex;
+   justify-content: flex-end;
+   
+
+}
+a.log {
+    width: 15%;
+    cursor: pointer;
+   text-decoration: none;
+   color: rgb(189, 189, 189);
+   font-size:1.2vw;
+}
+
+a.log:hover
+{
+    color: rgb(232, 232, 232);
+}
+
+
+
+/* ------------------------ */
+/* main - message         */
+/* -------------------      */
+
+main {
+    display: flex;
+    width: 100%;
+    height: 93%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(230, 230, 230);
+}
+div.main-message {
+    display: flex;
+    width: 60%;
+    height: 90%;
+    background-color: aqua;
+}
+
+div.container-users {
+  
+    width: 38%;
+    height: 100%;
+    background-color:rgb(211, 211, 211);
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+div.container-messages {
+    display: flex;
+    width: 62%;
+    height: 100%;
+    flex-direction: column;
+    background-color: rgb(56, 44, 44);
+  
+}
+
+
+
+
+ /* ------------------------ */
+/* message       */
+/* -------------------      */
+
+div.container-messages {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+ /* ------------------------ */
+/* message  title info     */
+/* -------------------      */
+
+
+div.messages-title {
+    display: flex;
+    width: 99.99%;
+    height: 10%;
+    background-color: rgb(42, 42, 42);
+    border-left: 2px solid rgb(103, 103, 103);
+}
+
+
+
+div.user-image-message {
+    display: flex;
+    width: 15%;
+
+align-items: center;
+justify-content: center;}
+
+
+i.rouded-image-message {
+    background-color: rgb(255, 255, 255);
+
+    width: 63%;
+    height: 80%;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 100%;
+}
+
+
+div.message-info-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+p.message-username {
+    font-size: 1.2vmax;
+    font-weight: bold;
+    color: white;
+}
+
+p.message-user-lastseen {
+    font-size: 0.8vmax;
+    font-weight: bold;
+    color: rgb(150, 150, 150);
+}
+
+ /* ------------------------ */
+/* list of message       */
+/* -------------------      */
+
+
+
+
+div.form-message-main {
+    display: flex;
+    width: 100%;
+    height: 14%;
+    display: flex;
+
+}
+
+div.list-messages {
+    display: flex;
+    height: 76%;
+    background-color: rgb(252, 254, 255);
+    flex-direction: column;
+    /* to hide when pass the form */
+   overflow-wrap: break-word; 
+   overflow-y: scroll;
+   overflow-x: hidden;
+   
+}
+
+
+ /* ------------------------ */
+/* message sent      */
+/* -------------------      */
+
+div.div-for-messages {
+    display: flex;
+    flex-wrap: wrap;
+  
+    flex-direction: column;
+
+   
+}
+
+div.messages-sent {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: fit-content;
+}
+
+
+div.message-text {
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+}
+
+
+div.userone{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.message-text-userone {
+    display: flex;
+    height: fit-content;
+    border: none;
+    background-color: rgb(160, 160, 160);
+    flex-wrap: wrap;
+    margin-right: 10%;
+    padding: 4%;
+    margin-top:1vh;
+    margin-bottom:2vh;
+    width: fit-content;
+    border-radius: 15px;
+    align-self: flex-end;
+    justify-content:flex-end;
+}
+
+
+
+div.usertwo  {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+}
+
+div.message-text-usertwo  {
+    display: flex;
+   height: fit-content;
+    border: 1px solid rgb(183, 183, 183);
+    background-color: rgb(237, 237, 237);
+    flex-wrap: wrap;
+    padding: 4%;
+    margin-top:1vh;
+    margin-bottom:2vh;
+    width: fit-content;
+    border-radius: 15px;
+}
+
+div.message-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 2vh;
+    font-size: 0.8vmax;
+    margin-top: 5px;
+    color: gray;
+    
+}
+
+
+
+
+
+div.message-text > p {
+    font-size:1vmax;
+}
+
+ /* ------------------------ */
+/* message form      */
+/* -------------------      */
+
+form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(252, 254, 255);
+}
+
+div.message-form {
+    width: 90%;
+    height: 80%;
+    border-radius: 13px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px solid rgb(146, 146, 146);
+    background-color: rgb(241, 241, 241);
+
+}
+
+textarea.input-form {
+    width: 86%;
+    height: 100%;
+  
+    border: none;
+    border-radius: 10px 0px 0px 10px ;
+    vertical-align: middle;    resize: none;
+    background-color: rgb(241, 241, 241);
+
+    outline: none;
+    font-size: 1vmax;
+}
+
+div.button-div {
+    width: 14%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.button-submit {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(241, 241, 241);
+    font-size: 1.0vmax;
+    color: rgb(0, 160, 228);
+
+}
+
+textarea :focus{
+    border: none;
+    outline: none;
+    outline-width: 0px;
+}
+

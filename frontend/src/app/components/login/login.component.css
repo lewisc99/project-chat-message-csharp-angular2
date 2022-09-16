@@ -1,0 +1,226 @@
+/* ------------------------ */
+/* main container          */
+/* -------------------      */
+
+body {
+   border: 0;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   width: 100vw;
+   height: 100vh;
+
+}
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.container {
+    display: flex;
+    background-color:rgb(208, 208, 208);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+div.row {
+    display: flex;
+    width: 25%;
+    background-color: rgb(255, 255, 255);
+    height: 80%;
+    border-radius: 20px;
+}
+
+/* ------------------------ */
+/* div form login         */
+/* -------------------      */
+
+form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+div.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+
+h1 {
+    font-size: 2.5vmax;
+    color: rgb(44, 44, 44);
+}
+
+div.form-title {
+display: flex;
+align-items: center;
+justify-self: flex-start;
+width: 100%;
+height: 20%;
+
+}
+
+/* ------------------------ */
+/* form group format          */
+/* -------------------      */
+
+div.form-group-item {
+    display: flex;
+    height: 13%;
+    align-items: center;
+}
+
+div.form-group {
+   display: flex; 
+   flex-direction: column;
+   width: 100%;
+}
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    width: 70%;
+    height: 40%;
+    border-radius: 7px;
+    border: 1px solid rgb(128, 128, 128);
+    font-size: 0.8vmax;
+
+}
+
+input:focus
+{
+    border-style: none;
+    color: rgb(59, 59, 59);
+    outline: 0;
+    border: 1px solid black;
+}
+
+div.alert-form-control {
+    color: rgb(189, 22, 22);
+    font-size: 0.8vmax;
+}
+
+div.alert-form-control.error-message {
+    color: rgb(189, 22, 22);
+    font-size: 1.0vmax;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+
+
+/* ------------------------ */
+/* login button          */
+/* -------------------      */
+
+div.button-login-form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+ button {
+     cursor: pointer;
+     border: none;
+     width: 60%;
+     height: 65%;
+     color: white;
+     background-color: rgb(49, 49, 49);
+     border-radius: 7px;
+     text-transform: uppercase;
+ }
+button:hover
+{
+    background-color: black;
+}
+
+
+/* ------------------------ */
+/* sing up router Link          */
+/* -------------------      */
+
+div.button-sign-up-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+p {
+    color: rgb(98, 98, 98);
+}
+
+a.sign-up {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(51, 51, 51);
+}
+a.sign-up:hover
+{
+    color: black;
+}
+
+a.return-to-home {
+    cursor: pointer;
+    color: rgb(56, 98, 161);
+    text-decoration: none;
+}
+a.return-to-home:hover {
+    color: rgb(35, 53, 81)
+
+}
+
+
+/* ------------------------ */
+/* responsive login form           */
+/* -------------------      */
+
+
+@media screen and (max-width:1300px) {
+    
+    div.row {
+        width: 40%;
+
+        
+    }
+
+    input {
+        width: 70%;
+        height: 50%;
+        border-radius: 7px;
+        border: 1px solid rgb(128, 128, 128);
+        font-size:1.2vmax;
+    
+    }
+
+}
+
+
+
+@media screen and (max-width:1200px) {
+    
+    div.row {
+        width: 40%;
+    }
+}
+@media screen and (max-width:840px) {
+    
+    div.row {
+        width: 55%;
+    }
+}
+
+
+
+@media screen and (max-width:440px) {
+    
+    div.row {
+        width: 80%;
+    }
+}

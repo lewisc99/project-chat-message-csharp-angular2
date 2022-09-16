@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+         <div class="form-container" formGroupName="login">
+            <div class="form-group form-title">
+            <h1>Login</h1>
+            </div>
+
+            <div class="alert-form-control error-message">
+                <div *ngIf="errorActived">
+                    {{errorMessage}}
+                    </div>
+               </div>
+
+           <div class="form-group form-group-item" >
+               <label  for="email">Email</label>
+               <input type="text" id="username" placeholder="type your email" class="form-control" formControlName="email" />
+
+               <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert-form-control">
+                   <div *ngIf="email?.errors?.['required']">
+                       Email is Required
+                   </div>
+                   <div *ngIf="email?.errors?.minlength">
+                       Email must be at least 7 characters
+                   </div>
+                   <div *ngIf="email?.errors?.maxlength">
+                       Email must be at Maximum 40 characters Long
+                   </div>
+                   <div *ngIf="email?.errors?.email">
+                       Email Pattern is Incorrect
+                   </div>
+                   <div *ngIf="email?.errors?.notOnlyWhiteSpace">
+                    first name must be at Maximum 15 characters Long
+                   </div>
+               </div>
+            </div>
+
+           <div class="form-group form-group-item">
+            <label  for="email">Password</label>
+            <input type="password" id="email" placeholder="type your password" class="form-control" formControlName="password"/>
+         
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="alert-form-control">
+                <div *ngIf="password?.errors?.required">
+                    Password is required
+                </div>
+                <div *ngIf="password?.errors?.maxlength">
+                    Password must be at Maximum 30 characters
+                </div>
+                <div *ngIf="password?.errors?.minlength">
+                    Password must be at least 5 characters
+                </div>
+                <div *ngIf="password?.errors?.notOnlyWhiteSpace">
+                    first name must be at Maximum 15 characters Long
+                </div>
+            </div>
+           
+        </div>
+        <div class="button-login-form form-group-item">
+            <button class="button-login">Login</button>
+        </div>
+        <div class="button-sign-up-form form-group-item">
+            <p>Or Sign Up with</p>
+            <a class="sign-up">Sign Up</a>
+        </div>
+
+        <div class="form-group-item">
+            <a class="return-to-home" [routerLink]="''">Return To Home</a>
+        </div>
+    </div>
+        </form>
+    </div>
+</div>

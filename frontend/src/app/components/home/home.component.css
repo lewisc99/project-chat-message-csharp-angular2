@@ -1,0 +1,163 @@
+
+/* ------------------------ */
+/* main container            */
+/* -------------------      */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+
+}
+
+
+div.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+
+}
+
+div.row {
+    display: flex;
+    width: 100%;
+    
+}
+
+div.nav-item-row {
+    height: 7%;
+}
+
+
+
+/* ------------------------ */
+/* navegator           */
+/* -------------------      */
+
+
+nav {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    background-color: rgb(42, 42, 42);
+}
+
+div.nav-item {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    color: rgb(189, 189, 189);
+    
+}
+
+
+/* ------------------------ */
+/* log nav items           */
+/* -------------------      */
+
+div.log-in {
+    display: flex;
+   justify-content: flex-end;
+   
+
+}
+a.log {
+    width: 15%;
+    cursor: pointer;
+   text-decoration: none;
+   color: rgb(189, 189, 189);
+   font-size:1.2vw;
+}
+
+a.log:hover
+{
+    color: rgb(232, 232, 232);
+}
+
+
+
+/* ------------------------ */
+/* section main content         */
+/* -------------------      */
+
+div.row-section {
+    width: 100%;
+    display: flex;
+    height: 100%;
+}
+
+section {
+display: flex;
+width: 100%;
+background-color:rgb(230, 230, 230);
+
+}
+
+div.session-content {
+   width: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+div.content-info {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+
+/* ------------------------ */
+/* image          */
+/* -------------------      */
+
+img {
+    width: 45%;
+    height: 60%;
+}
+
+h1 {
+    font-size:6vmin;
+    color: rgb(32, 32, 32);
+  
+}
+
+p,a.info {
+    font-size: 3vmin;
+    color: rgb(61, 61, 61);
+    margin-top: 3%;
+ text-decoration: none;
+
+}
+
+a.info {
+    cursor: pointer;
+    color: rgb(28, 26, 26);
+    transition:  0.2s;
+}
+a.info:hover
+{  color: rgb(114, 114, 114);
+
+ text-decoration:underline;
+
+}
+
+
+
+@media screen and (max-width:1000px) {
+    
+    a.log {
+      font-size:1.3vmax;
+      width: 25%;
+    }
+    div.nav-item {
+        justify-content: space-evenly;
+    }
+
+    img {
+        width: 67%;
+        height: 40%;
+    }
+    
+}

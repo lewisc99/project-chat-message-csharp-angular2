@@ -1,0 +1,62 @@
+
+<div class="container">
+    <div class="row nav-item-row">
+        <nav>
+        <div class="nav-item">
+            <a class="log" [routerLink]="'..'">Home Page</a>
+            <a class="log">Faq</a>
+        </div>
+        <div class="nav-item log-in">
+            <a class="log" [routerLink]="'../login'">Log In</a>
+            <a class="log">Log Out</a>
+        </div>
+          </nav>
+    </div>
+   <main>
+       <div class="main-message">
+        <div class="container-main container-users">
+            <app-users-messages (secondUserId)="SelectUserMessage($event)"></app-users-messages>
+         </div>
+
+            <div class="container-main container-messages">
+                <div class="info-messages messages-title">
+                    <div class="user-image user-image-message">
+                        <i class="rouded-image-message"></i>
+                    </div>
+                    <div class="message-info-title">
+                        <p class="message-username">Rickson Matheus</p>
+                        <p class="message-user-lastseen">Online 18 min ago</p>
+                    </div>
+                </div>
+                <div class="info-messages list-messages" >
+                    <div *ngFor="let message of messages" class="div-for-messages">
+                    
+                    <div *ngIf="(message.ToId == secondUserById)" class="messages-sent userone">
+                        <div class="message-date">{{message.Created|date}}</div>
+                        <div class="message-text message-text-userone">
+                        <p>{{message.Text}}</p>
+                      </div>
+                    </div>
+                    <div *ngIf="message.ToId == firstUserId" class="messages-sent usertwo ">
+                        <div class="message-date">{{message.Created|date:'short'}}</div>
+                        <div class="message-text message-text-usertwo">
+                            <p>{{message.Text}}</p>
+                          </div>
+                    </div>
+                </div>
+                </div>
+                <div class="info-messages form-message-main">
+                    <form>
+                       <div class="message-form">
+                           <textarea class="input-form" rows="4" cols="1" wrap="hard" maxlength="200" placeholder="message"   #textMessage></textarea>
+                           <div class="button-div">
+                            <button type="button" class="button-submit" (click)="getTextMessage(textMessage.value)">Send</button>
+                           </div>
+                       </div>
+                    </form>
+                </div>
+            </div>
+       </div>
+   </main>
+  
+</div>

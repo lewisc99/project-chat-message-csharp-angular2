@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.Helpers;
+using TalkToApiStudyTest.Hub;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
@@ -256,6 +257,8 @@ namespace TalkToApiStudyTest
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapHub<BroadcastHub>("/notify");
                 endpoints.MapControllers();
             });
 

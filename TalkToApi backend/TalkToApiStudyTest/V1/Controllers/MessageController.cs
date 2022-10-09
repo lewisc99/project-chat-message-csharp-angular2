@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TalkToApiStudyTest.Helpers.Contants;
+using TalkToApiStudyTest.Hub;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
@@ -28,11 +30,13 @@ namespace TalkToApiStudyTest.V1.Controllers
 
         private IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
+        private IHubContext<BroadcastHub, IClientHub> _hubContext;
 
-        public MessageController(IMessageRepository messageRepository, IMapper mapper)
+        public MessageController(IMessageRepository messageRepository, IMapper mapper, IHubContext<BroadcastHub, IClientHub> hubContext)
         {
             _messageRepository = messageRepository;
             _mapper = mapper;
+            _hubContext = hubContext;
         }
 
 
@@ -87,6 +91,8 @@ namespace TalkToApiStudyTest.V1.Controllers
                 try
                 {
                     _messageRepository.Register(message);
+                    _hubContext.Clients.All.brodcastNotification();
+
 
                     if (mediaType == CustomMediaType.Hateoas)
                     {

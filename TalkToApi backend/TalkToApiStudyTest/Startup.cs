@@ -54,6 +54,12 @@ namespace TalkToApiStudyTest
                     cfg.AddPolicy("anyMethod", policy =>
                     {
                         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+
+                        policy.AllowAnyHeader()
+                      .AllowAnyMethod()
+                      .SetIsOriginAllowed((host) => true)
+                      .AllowCredentials();
+
                     });
 
 
@@ -226,6 +232,9 @@ namespace TalkToApiStudyTest
 
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+
+
+            services.AddSignalR();
 
 
         }

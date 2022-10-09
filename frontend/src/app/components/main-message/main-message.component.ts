@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'src/app/models/message';
 import { MessageService } from 'src/app/services/message.service';
+import { NotificationHubService } from 'src/app/services/notificationhub.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class MainMessageComponent implements OnInit {
 
-  constructor(private storageToken:TokenStorageService, private messageService:MessageService) { }
+  constructor(private storageToken:TokenStorageService, private messageService:MessageService,
+    private notificationHubService:NotificationHubService) { }
 
   public messages:Message[];
   public firstUserId:string = this.storageToken.getUserId();
@@ -18,6 +20,9 @@ export class MainMessageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.notificationHubService.notificationMessage();
+    
   }
  
 

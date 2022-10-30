@@ -30,7 +30,7 @@ namespace TalkToApiStudyTest.V1.Controllers
 
         private IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
-        private IHubContext<BroadcastHub, IClientHub> _hubContext;
+        private readonly IHubContext<BroadcastHub, IClientHub> _hubContext;
 
         public MessageController(IMessageRepository messageRepository, IMapper mapper, IHubContext<BroadcastHub, IClientHub> hubContext)
         {
@@ -60,6 +60,8 @@ namespace TalkToApiStudyTest.V1.Controllers
                 
                 List<MessageDTO> messageDTO = _mapper.Map<List<Message>, List<MessageDTO>>(messages);
 
+                _hubContext.Clients.All.brodcastConnectionId(userOne);
+
 
 
                 ListDTO<MessageDTO> result = new ListDTO<MessageDTO>() { Result = messageDTO };
@@ -82,7 +84,7 @@ namespace TalkToApiStudyTest.V1.Controllers
         [MapToApiVersion("1.0")]
 
         [HttpPost(Name ="RegisterMessage")]
-        public async Task<ActionResult> Register([FromBody] Message message,
+        public async Task<ActionResult> Register([FromBody] MessageConnectionId message,
             [FromHeader(Name ="Accept")] string mediaType)
         {
 
@@ -90,14 +92,20 @@ namespace TalkToApiStudyTest.V1.Controllers
             {
                 try
                 {
-                    _messageRepository.Register(message);
-                    _hubContext.Clients.All.brodcastNotification();
+
+                   var newMessage =   _mapper.Map<MessageConnectionId,Message >(message);
+
+                    _hubContext.Clients.AllExcept(message.ToConnectionId).brodcastNotification(message);
+                    _messageRepository.Register(newMessage);
+
 
 
                     if (mediaType == CustomMediaType.Hateoas)
                     {
 
-                        MessageDTO messageDTO = _mapper.Map<Message, MessageDTO>(message);
+                        MessageDTO messageDTO = _mapper.Map<Message, MessageDTO>(newMessage);
+
+
 
 
                         messageDTO.links.Add(new LinkDTO("_self", Url.Link("RegisterMessage", new { }), "POST"));

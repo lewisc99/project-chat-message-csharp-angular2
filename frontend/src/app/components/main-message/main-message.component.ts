@@ -14,15 +14,15 @@ export class MainMessageComponent implements OnInit {
   constructor(private storageToken:TokenStorageService, private messageService:MessageService,
     private notificationHubService:NotificationHubService) { }
 
-  public messages:Message[];
+  public messages:Message[] = [];
   public firstUserId:string = this.storageToken.getUserId();
   public secondUserById:string;
-
 
   ngOnInit(): void {
 
     this.notificationHubService.notificationMessage();
-    
+    this.notificationHubService.userNotified();
+  
   }
  
 
@@ -30,28 +30,36 @@ export class MainMessageComponent implements OnInit {
   {
     this.secondUserById = secondUserId;
 
+
+    
     this.messageService.getUserMessages(this.firstUserId,secondUserId).subscribe(
       (response:any) =>
       {
-
        console.log(response);
        console.log("main-message messages");
        return this.messages = response;
-
+      
+      
       },(error:any) =>
       {
         console.log("user-message error: " + error);
       }
     )
+
+    this.notificationHubService.messages.subscribe(
+      (data:any) =>
+      {
+        console.log("from container main-messages");
+       var message:Message = new Message(data.fromId, data.toId,data.text);
+       console.log(message);
+        this.messages.push(message);
+      }
+    );
       
   }
 
   getTextMessage(messagetext:string)
   {
-    
-
-
-    
     var message:Message  = new Message(this.firstUserId,this.secondUserById,messagetext);
     this.messageService.sendMessageToUser(message).subscribe(
       (response:any) =>
@@ -59,7 +67,6 @@ export class MainMessageComponent implements OnInit {
         console.log("new Message Added");
         console.log(response);
         this.messages.push(response);
-
       },
       (error:any) =>
       {

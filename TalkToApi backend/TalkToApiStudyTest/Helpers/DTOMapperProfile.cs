@@ -27,6 +27,8 @@ namespace TalkToApiStudyTest.Helpers
 
             CreateMap<Message, MessageDTO>();
 
+            CreateMap<MessageConnectionId, Message>();
+
         }
     }
 }

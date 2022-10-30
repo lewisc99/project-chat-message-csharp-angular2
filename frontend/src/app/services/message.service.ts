@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { Message } from '../models/message';
+import { NotificationHubService } from './notificationhub.service';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { TokenStorageService } from './token-storage.service';
 })
 export class MessageService {
 
-  constructor(private httpCient:HttpClient, private tokenStorage:TokenStorageService) { }
+  constructor(private httpCient:HttpClient, private tokenStorage:TokenStorageService, private notificationHub:NotificationHubService) { }
 
 
 
@@ -20,7 +21,7 @@ export class MessageService {
     public getUserMessages(userIdOne:string,userIdTwo:string):Observable<Message[]>
     {
 
-
+      
       let urlWithUserIds = this.urlDefaultMessage + userIdOne + "/" + userIdTwo;
 
       let  headers = new HttpHeaders({
@@ -38,6 +39,7 @@ export class MessageService {
         headers: headers
       };
     
+
 
       return this.httpCient.get<getMessages>(urlWithUserIds,options).pipe(
        
@@ -68,12 +70,18 @@ export class MessageService {
         'crossDomain': 'true',
         'Access-Control-Allow-Origin':'*',
         'Authorization':"Bearer " + this.tokenStorage.getToken()
-       
         });
+
 
         var options =  {
           headers: headers
         };
+
+
+        message.ToConnectionId = this.notificationHub.getConnection();
+
+        this.getUserMessages
+
         return this.httpCient.post(this.urlDefaultMessage,message,options).pipe(
           map(
             (response:any) =>

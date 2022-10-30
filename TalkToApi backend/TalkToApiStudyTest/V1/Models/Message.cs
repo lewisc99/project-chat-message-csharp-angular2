@@ -37,5 +37,6 @@ namespace TalkToApiStudyTest.V1.Models
         public DateTime? Updated { get; set; }
 
 
+
     }
 }

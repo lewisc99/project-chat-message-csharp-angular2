@@ -1,9 +1,10 @@
 export class Message {
-    Id:string;
-    FromId:string;
-    ToId:string;
-    Text:string;
-    Created:Date
+    Id?:string;
+    FromId?:string;
+    ToId?:string;
+    Text?:string;
+    Created?:Date;
+    ToConnectionId?:string;
 
     constructor( fromId:string,toId:string,text:string)
     {

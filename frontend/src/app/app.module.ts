@@ -24,7 +24,6 @@ import { UsersMessagesComponent } from './components/main-message/users-messages
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule
-   
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

@@ -46,11 +46,11 @@
                 </div>
                 </div>
                 <div class="info-messages form-message-main">
-                    <form>
+                    <form [formGroup]="formGroup">
                        <div class="message-form">
-                           <textarea class="input-form" rows="4" cols="1" wrap="hard" maxlength="200" placeholder="message"   #textMessage></textarea>
+                           <textarea class="input-form" rows="4" cols="1" wrap="hard"  placeholder="message" formControlName="messageText"></textarea>
                            <div class="button-div">
-                            <button type="button" class="button-submit" (click)="getTextMessage(textMessage.value)">Send</button>
+                            <button type="button" class="button-submit" (click)="sendTextMessage()">Send</button>
                            </div>
                        </div>
                     </form>

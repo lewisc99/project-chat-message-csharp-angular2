@@ -80,7 +80,7 @@ export class MessageService {
 
         message.ToConnectionId = this.notificationHub.getConnection();
 
-        this.getUserMessages
+   
 
         return this.httpCient.post(this.urlDefaultMessage,message,options).pipe(
           map(

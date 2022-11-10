@@ -8,8 +8,6 @@ export class Message {
 
     constructor( fromId:string,toId:string,text:string)
     {
-
-    
         this.FromId = fromId;
         this.ToId = toId;
         this.Text = text;

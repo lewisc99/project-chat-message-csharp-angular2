@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
 

@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "LMXSDFjlTfKXVU1t1+5vpsnnvZUKQ4m9ytzYasE5SpV42Pdd/AHfEwIW0QkT9fDw9i7acUoWE4ZXPxu7sLVS4w==",
+  "dgSpecHash": "5UTYV3z/OUcpA1XhtPBjnX/R7oREUK7IjigyUF7BunJ17ROmM/Sr7Pogb7vy5+7r2Ovbr15jfSDSh4POejduvA==",
   "success": true,
   "projectFilePath": "D:\\arquivos\\programation\\workspaceCsharpAngular\\month8\\taltomessage\\TalkToApi backend\\TalkToApiStudyTest\\TalkToApiStudyTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pichau\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Pichau\\.nuget\\packages\\microsoft.aspnet.signalr\\2.4.3\\microsoft.aspnet.signalr.2.4.3.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.26\\microsoft.aspnetcore.authentication.jwtbearer.3.1.26.nupkg.sha512",

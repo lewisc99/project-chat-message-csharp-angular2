@@ -30,10 +30,9 @@ export class NotificationHubService {
       .withUrl( "https://localhost:44334/"+ "notify")
       .build();
     this.hubConnection.start().then(() => console.log("Hub connection started"));
-
- 
-      
   }
+
+
   
 
   notificationMessage():void 
@@ -72,6 +71,7 @@ getConnectionId():void
   {
     return this.connectionId;
   }
+  
   public DownConnectionId():void 
   {
     this.connectionId = "";

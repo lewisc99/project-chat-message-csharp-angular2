@@ -6,7 +6,6 @@ namespace TalkToApiStudyTest.Helpers
 {
     public class DTOMapperProfile: Profile
     {
-
         public DTOMapperProfile()
         {
 
@@ -14,17 +13,12 @@ namespace TalkToApiStudyTest.Helpers
                 .ForMember(dest => dest.Name, orig => orig.MapFrom(src =>
                src.FullName));
 
-
-            CreateMap<ApplicationUser, UserDTOSemHyperlink>()
-       .ForMember(dest => dest.Name, orig => orig.MapFrom(src => src.FullName));
-
-
-
+                CreateMap<ApplicationUser, UserDTOSemHyperlink>()
+           .ForMember(dest => dest.Name, orig => orig.MapFrom(src => src.FullName));
 
             CreateMap<Message, MessageDTO>();
 
             CreateMap<MessageConnectionId, Message>();
-
         }
     }
 }

@@ -39,10 +39,7 @@ namespace TalkToApiStudyTest
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -53,35 +50,26 @@ namespace TalkToApiStudyTest
                     cfg.AddPolicy("anyMethod", policy =>
                     {
                         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
-
                         policy.AllowAnyHeader()
                       .AllowAnyMethod()
                       .SetIsOriginAllowed((host) => true)
                       .AllowCredentials();
-
                     });
-
-
                 });
-           
-
 
             services.AddDbContext<TalkToContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("DefaultConnection")));
-
 
             services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;
             });
 
-
             services.AddDbContext<TalkToContext>(
                 options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
-
 
             services.AddIdentity<ApplicationUser, IdentityRole>(
                 config =>
@@ -94,11 +82,9 @@ namespace TalkToApiStudyTest
                 .AddEntityFrameworkStores<TalkToContext>()
                 .AddDefaultTokenProviders();
 
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
-
 
             services.AddControllers(config =>
             {
@@ -112,8 +98,6 @@ namespace TalkToApiStudyTest
                     opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 });
 
-
-
             services.AddAuthentication(options =>
             {
 
@@ -122,7 +106,7 @@ namespace TalkToApiStudyTest
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
             }).AddJwtBearer(
-         //indicate which elements of token must be validated
+
          options => options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
          {
 
@@ -132,8 +116,6 @@ namespace TalkToApiStudyTest
              ValidateIssuerSigningKey = true,
              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("chave-api-jwt-minhas-tarefas"))
          });
-
-
 
             services.AddApiVersioning(
                 cfg =>
@@ -176,7 +158,6 @@ namespace TalkToApiStudyTest
                         }
                     });
 
-
                 c.SwaggerDoc("v1.0", new OpenApiInfo
                 {
                     Version = "v1.0",
@@ -201,11 +182,7 @@ namespace TalkToApiStudyTest
 
                 c.ResolveConflictingActions(apiDescription => apiDescription.First());
 
-
-
-
             });
-
 
             services.AddAuthorization(auth =>
             {
@@ -223,7 +200,6 @@ namespace TalkToApiStudyTest
                 };
             });
 
-
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new DTOMapperProfile());
@@ -232,13 +208,9 @@ namespace TalkToApiStudyTest
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
 
-
             services.AddSignalR();
-
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -246,22 +218,11 @@ namespace TalkToApiStudyTest
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
-          
-
-            app.UseAuthentication();
-
-           
-
-            app.UseRouting();
-
-
-
+           app.UseHttpsRedirection();
+           app.UseAuthentication();
+           app.UseRouting();
            app.UseCors("anyMethod");
-
-
-            app.UseAuthorization();
+           app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

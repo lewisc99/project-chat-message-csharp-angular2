@@ -7,15 +7,10 @@ namespace TalkToApiStudyTest.V1.Models
 {
     public class Message
     {
-
-
         [Key]
         public int Id { get; set; }
 
-
-
         [ForeignKey("FromId")]
-
         public ApplicationUser From { get; set; }
 
         [Required]
@@ -27,16 +22,9 @@ namespace TalkToApiStudyTest.V1.Models
         [Required]
         public string ToId { get; set; }
 
-
         [Required]
         public string Text { get; set; }
-
         public DateTime Created { get; set; }
-
-
         public DateTime? Updated { get; set; }
-
-
-
     }
 }

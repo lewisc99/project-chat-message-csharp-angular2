@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 
+
+#pragma warning disable 1591
 namespace TalkToApiStudyTest.V1.Repositories
 {
     public class TokenRepository : ITokenRepository
     {
-
-
         private readonly TalkToContext _banco;
         public TokenRepository(TalkToContext banco)
         {

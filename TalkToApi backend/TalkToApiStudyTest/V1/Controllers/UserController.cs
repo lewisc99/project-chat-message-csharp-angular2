@@ -16,10 +16,9 @@ using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 
+#pragma warning disable 
 namespace TalkToApiStudyTest.V1.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
@@ -28,9 +27,6 @@ namespace TalkToApiStudyTest.V1.Controllers
     [EnableCors(PolicyName = "anyMethod")]
     public class UserController: ControllerBase
     {
-
-
-
         private readonly IUserRepository _userRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -45,18 +41,12 @@ namespace TalkToApiStudyTest.V1.Controllers
             _tokenRepository = tokenRepository;
             _mapper = mapper;
         }
-
-
         
         [HttpGet("",Name = "GetAll")]
         [MapToApiVersion("1.0")]
-    
         public async Task<ActionResult> GetAll([FromHeader(Name ="Accept")] string mediaType)
         {
             List<ApplicationUser> usersAppUser = _userManager.Users.ToList();
-
-
-
 
             if (mediaType == CustomMediaType.Hateoas)
             {
@@ -65,37 +55,26 @@ namespace TalkToApiStudyTest.V1.Controllers
                 foreach (var list in listUsersDTO)
                 {
                     list.links.Add(new LinkDTO("_self", Url.Link("Get", new { id = list.Id }), "GET"));
-
                 }
 
-
                 var result = new ListDTO<UserDTO> { Result = listUsersDTO };
-
                 result.links.Add(new LinkDTO("_self", Url.Link("GetAll", new { }), "GET"));
+
                 return Ok(result);
-
-
-                return Ok(listUsersDTO);
             }
+
             else
             {
                 List<UserDTOSemHyperlink> userSemHyperLink = _mapper.Map<List<ApplicationUser>, List<UserDTOSemHyperlink>>(usersAppUser);
-
                 return Ok(userSemHyperLink);
             }
-         
-
         }
-
 
         [HttpGet("{id}", Name = "Get")]
         [MapToApiVersion("1.0")]
-     
         public async Task<ActionResult> Get(string id)
         {
-
             ApplicationUser userById = await _userRepository.Get(id);
-
 
             if (userById == null)
             {
@@ -103,38 +82,24 @@ namespace TalkToApiStudyTest.V1.Controllers
             }
 
             UserDTO userDTO = _mapper.Map<ApplicationUser, UserDTO>(userById);
-
             userDTO.links.Add(new LinkDTO("_self", Url.Link("Get", new { Id = id }), "GET"));
             userDTO.links.Add(new LinkDTO("_Update", Url.Link("Update", new { Id = id }), "GET"));
 
-
-
-
-
             return Ok(userDTO);
-            
-
-
         }
-
-
-
 
         [HttpPost("login")]
         [MapToApiVersion("1.0")]
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-
             if (ModelState.IsValid)
             {
                 ApplicationUser user = await _userManager.FindByEmailAsync(loginDTO.Email);
 
                 if (user != null)
                 {
-
                     var token = BuildToken(user);
-
                     var tokenModel = new Token()
                     {
                         RefreshToken = token.RefreshToken,
@@ -145,19 +110,14 @@ namespace TalkToApiStudyTest.V1.Controllers
                         Utilized = false
                     };
 
-
-
                     _tokenRepository.Register(tokenModel);
 
                     return Ok(token);
-
-
                 }
                 ModelState.AddModelError(nameof(loginDTO.Email), "Invalid user or password");
             }
             return Unauthorized();
         }
-
 
         [MapToApiVersion("1.0")]
         [AllowAnonymous]
@@ -169,15 +129,12 @@ namespace TalkToApiStudyTest.V1.Controllers
             {
                 ApplicationUser user = new ApplicationUser();
 
-
-
                 user.UserName = registerDTO.Name;
                 user.Email = registerDTO.Email;
                 user.FullName = registerDTO.Name;
                 user.Slogan = registerDTO.Slogan;
 
                 IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
-
 
                 if (!result.Succeeded)
                 {
@@ -191,17 +148,10 @@ namespace TalkToApiStudyTest.V1.Controllers
                 }
                 else
                 {
-
-
                     if (mediaType == CustomMediaType.Hateoas)
                     {
 
-                        UserDTO userDTO = _mapper.Map<ApplicationUser, UserDTO>(user);
-
-                        userDTO.links.Add(new LinkDTO("_self", Url.Link("Get", new { id = user.Id }), "GET"));
-                        userDTO.links.Add(new LinkDTO("_Register", Url.Link("Register", new { id = user.Id }), "POST"));
-                        userDTO.links.Add(new LinkDTO("_Update", Url.Link("Update", new { id = user.Id }), "PUT"));
-
+                        UserDTO userDTO = transformToCustomMediaTypeHateaos(user);
 
                         return Ok(userDTO);
                     }
@@ -209,13 +159,10 @@ namespace TalkToApiStudyTest.V1.Controllers
                     else
                     {
                        UserDTOSemHyperlink userSemHyperLink = _mapper.Map<ApplicationUser,UserDTOSemHyperlink>(user);
-
-                        return Ok(userSemHyperLink);
+                       
+                       return Ok(userSemHyperLink);
                     }
-
-
                 }
-
             }
             else
             {
@@ -241,34 +188,25 @@ namespace TalkToApiStudyTest.V1.Controllers
         public async Task<ActionResult> Renovate([FromBody] TokenDTO tokenDTO)
         {
 
-            Token refreshTokenDb = await _tokenRepository.Get(tokenDTO.RefreshToken);
+            Token oldToken = await _tokenRepository.Get(tokenDTO.RefreshToken);
 
-            if (refreshTokenDb == null)
+            if (oldToken == null)
             {
                 return NotFound();
             }
 
-            refreshTokenDb.Updated = DateTime.Now;
-            refreshTokenDb.Utilized = true;
-            _tokenRepository.Update(refreshTokenDb);
+            oldToken.Updated = DateTime.Now;
+            oldToken.Utilized = true;
+            _tokenRepository.Update(oldToken);
 
 
-            ApplicationUser user = await _userRepository.Get(refreshTokenDb.UserId);
-
-
-            var token = BuildToken(user);
-
-
-            Token tokenModel = new Token(token.RefreshToken, user, false, token.Expiration, token.ExpirationRefreshToken, DateTime.Now);
+            ApplicationUser user = await _userRepository.Get(oldToken.UserId);
+            TokenDTO newToken = BuildToken(user);
+            Token tokenModel = new Token(newToken.RefreshToken, user, false, newToken.Expiration, newToken.ExpirationRefreshToken, DateTime.Now);
 
             _tokenRepository.Register(tokenModel);
 
-
-            return Ok(token);
-
-
-
-
+            return Ok(newToken);
 
         }
 
@@ -276,7 +214,6 @@ namespace TalkToApiStudyTest.V1.Controllers
         [HttpPut("{id}",Name = "Update")]
         public async Task<ActionResult> Update(string id, [FromBody] RegisterUser registerUser,[FromHeader(Name = "Accept")] string mediaType)
         {
-
             ApplicationUser user = await _userManager.FindByIdAsync(id);
 
             if ( user.Id != id)
@@ -287,16 +224,11 @@ namespace TalkToApiStudyTest.V1.Controllers
             if (ModelState.IsValid)
             {
              
-                user.UserName = registerUser.Name;
-                user.Email = registerUser.Email;
-                user.FullName = registerUser.Email;
-                user.Slogan = registerUser.Slogan;
-
+                convertToApplicationUser(user, registerUser);
 
                 IdentityResult result = await _userManager.UpdateAsync(user);
                 await _userManager.RemovePasswordAsync(user);
                 await _userManager.AddPasswordAsync(user, registerUser.Password);
-
 
                 if (!result.Succeeded)
                 {
@@ -310,15 +242,10 @@ namespace TalkToApiStudyTest.V1.Controllers
                 }
                 else
                 {
-
                     if (mediaType == CustomMediaType.Hateoas)
                     {
-                        UserDTO userDTO = _mapper.Map<ApplicationUser, UserDTO>(user);
 
-                        userDTO.links.Add(new LinkDTO("_self", Url.Link("Get", new { id = user.Id }), "GET"));
-                        userDTO.links.Add(new LinkDTO("_Register", Url.Link("Register", new { }), "POST"));
-                        userDTO.links.Add(new LinkDTO("_Update", Url.Link("Update", new { id = user.Id }), "PUT"));
-
+                        UserDTO userDTO = transformToCustomMediaTypeHateaos(user);
 
                         return Ok(userDTO);
                     }
@@ -328,9 +255,7 @@ namespace TalkToApiStudyTest.V1.Controllers
 
                         return Ok(userSemHyperLink);
                     }
-              
                 }
-
             }
             else
             {
@@ -338,42 +263,49 @@ namespace TalkToApiStudyTest.V1.Controllers
             }
         }
 
+        private void convertToApplicationUser(ApplicationUser userApplication, RegisterUser userDTO)
+        {
+            userApplication.UserName = userDTO.Name;
+            userApplication.Email = userDTO.Email;
+            userApplication.FullName = userDTO.Email;
+            userApplication.Slogan = userDTO.Slogan;
+        }
+
+        private UserDTO transformToCustomMediaTypeHateaos(ApplicationUser user)
+        {
+            UserDTO userDTO = _mapper.Map<ApplicationUser, UserDTO>(user);
+
+            userDTO.links.Add(new LinkDTO("_self", Url.Link("Get", new { id = user.Id }), "GET"));
+            userDTO.links.Add(new LinkDTO("_Register", Url.Link("Register", new { }), "POST"));
+            userDTO.links.Add(new LinkDTO("_Update", Url.Link("Update", new { id = user.Id }), "PUT"));
+
+            return userDTO;
+        }
+
 
         private TokenDTO BuildToken(ApplicationUser usuario)
         {
-
             var claims = new[]
             {
-              // new Claim(JwtRegisteredClaimNames.Aud, "wwww.meuapp.com.br") to use when a website need a permission
               new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-              new Claim(JwtRegisteredClaimNames.Sub, usuario.Id) //this property helps identify the user.
-
+              new Claim(JwtRegisteredClaimNames.Sub, usuario.Id) 
            };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("chave-api-jwt-minhas-tarefas")); // recommend  add the text in -> appsetttings.json
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("chave-api-jwt-minhas-tarefas")); 
             var sign = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var exp = DateTime.UtcNow.AddHours(1);
 
             JwtSecurityToken token = new JwtSecurityToken(
                 issuer: null,
-                audience: null, //means which site is requiring the token, null add to any
+                audience: null, 
                 claims: claims,
                 expires: exp,
                 signingCredentials: sign);
 
-
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token); // passing the token datas and will generate a string encrypted 
-
-
-
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token); 
             var refreshToken = Guid.NewGuid().ToString();
-
             var expRefreshToken = DateTime.UtcNow.AddHours(2);
-
-
-
             var tokenDTO = new TokenDTO { UserId = usuario.Id, Token = tokenString, Expiration = exp, ExpirationRefreshToken = expRefreshToken, RefreshToken = refreshToken };
-
 
             return tokenDTO;
         }

@@ -75,8 +75,6 @@ a.log:hover
     color: rgb(232, 232, 232);
 }
 
-
-
 /* ------------------------ */
 /* section main content         */
 /* -------------------      */
@@ -91,7 +89,6 @@ section {
 display: flex;
 width: 100%;
 background-color:rgb(230, 230, 230);
-
 }
 
 div.session-content {
@@ -120,7 +117,6 @@ img {
 h1 {
     font-size:6vmin;
     color: rgb(32, 32, 32);
-  
 }
 
 p,a.info {
@@ -128,7 +124,6 @@ p,a.info {
     color: rgb(61, 61, 61);
     margin-top: 3%;
  text-decoration: none;
-
 }
 
 a.info {
@@ -136,6 +131,7 @@ a.info {
     color: rgb(28, 26, 26);
     transition:  0.2s;
 }
+
 a.info:hover
 {  color: rgb(114, 114, 114);
 
@@ -144,9 +140,10 @@ a.info:hover
 }
 
 
-
+/* -------------------- */
+/* RESPONSIVE  */
+/* -------------------- */
 @media screen and (max-width:1000px) {
-    
     a.log {
       font-size:1.3vmax;
       width: 25%;

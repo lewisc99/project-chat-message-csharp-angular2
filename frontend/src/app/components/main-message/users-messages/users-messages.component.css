@@ -36,7 +36,6 @@ div.whole-user-messages {
     flex-direction: column;
     width: 100%;
     flex-wrap: wrap;
-   
 }
 
 
@@ -47,7 +46,6 @@ div.user-messages {
     height:10vh;
     background-color: white;
     cursor: pointer;
- 
 } 
 
 
@@ -61,15 +59,12 @@ div.message-title-user {
     height: 10%;
     background-color: rgb(228, 228, 228);
     align-items: center;
-     
-    
 }
 
 div.message-title-user > p {
     color: rgb(0, 0, 0);
     font-weight: bold;
     font-size:smaller;
-  
 }
 
 

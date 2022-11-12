@@ -13,16 +13,11 @@ export class UsersMessagesComponent implements OnInit {
 
   constructor(private userService:UserService, private messageService:MessageService, private tokenStorageService:TokenStorageService) { }
   @Output() secondUserId = new EventEmitter();
- 
 
   users:User[];
 
-
   ngOnInit(): void {
-
-
     this.getUsers();
-  
   }
 
   private getUsers()
@@ -41,11 +36,7 @@ export class UsersMessagesComponent implements OnInit {
   SelectUserMessage(secondUserId:string)
   {
     console.log(secondUserId);
-
-
     this.secondUserId.emit(secondUserId);
- 
   }
- 
 
 }

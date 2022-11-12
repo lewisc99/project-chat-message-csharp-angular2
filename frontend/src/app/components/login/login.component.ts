@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { Login } from 'src/app/models/login';
 import { UserService } from 'src/app/services/user.service';
 import { LoginFormValidators } from 'src/app/Validators/login-form.validators';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
 
   loginForm:FormGroup;
   login:Login;
   errorActived:boolean = false;
   errorMessage:string = "";
+  loginSubscription:Subscription;
 
-
-  constructor( private formBuilder:FormBuilder, private userService: UserService , private router:Router) { }
+  constructor(private formBuilder:FormBuilder, private userService: UserService , private router:Router) { }
+ 
 
   ngOnInit(): void {
-
     this.loginForm = this.formBuilder.group(
       {
         login: this.formBuilder.group({
@@ -30,8 +30,12 @@ export class LoginComponent implements OnInit {
         })
       });
   }
+  
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
+  }
 
-
+  
  get email()
   {
     return this.loginForm.get("login.email");
@@ -41,7 +45,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get("login.password");
   }
 
-  onSubmit()
+ public onSubmit()
   {
     this.errorActived = false;
     this.errorMessage = "";
@@ -56,7 +60,7 @@ export class LoginComponent implements OnInit {
       const password = this.loginForm.get("login")?.get("password")?.value;
        this.login = new Login(email,password);
   
-       this.userService.loginUser(this.login).subscribe(
+      this.loginSubscription = this.userService.loginUser(this.login).subscribe(
          
          data =>  {
             console.log(JSON.stringify(data))
@@ -68,34 +72,32 @@ export class LoginComponent implements OnInit {
            this.errorsHandle(error);
          }
        )
-       
     }
-
-   
-    
-    
   }
-  errorsHandle(error:any)
+
+  errorsHandle(error:any) : void
   {
-    if (error.status == 401)
+    switch(error.status)
     {
-      this.errorActived = true;
-      this.errorMessage = "Your Email or Password is Incorrect!";
+      case 401:
+      {
+        this.errorActived = true;
+        this.errorMessage = "Your Email or Password is Incorrect!";
+        break;
+      }
+      case 0:
+      {
+        this.errorActived = true;
+        this.errorMessage = "Please try to Log In again Later";
+        break;
+      }
+      case 500:
+        {
+          this.errorActived = true;
+          this.errorMessage = "Please try to Log In again Later";
+          break;
+        }
     }
-    if (error.status == 0)
-    {
-      this.errorActived = true;
-      this.errorMessage = "Please try to Log In again Later";
-    }
-
-    if (error.status == 500)
-    {
-      this.errorActived = true;
-      this.errorMessage = "Please try to Log In again Later";
-    }
-    
   }
-
- 
 
 }

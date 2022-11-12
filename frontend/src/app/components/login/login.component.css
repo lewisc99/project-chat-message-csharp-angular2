@@ -63,7 +63,6 @@ align-items: center;
 justify-self: flex-start;
 width: 100%;
 height: 20%;
-
 }
 
 /* ------------------------ */
@@ -91,7 +90,6 @@ input {
     border-radius: 7px;
     border: 1px solid rgb(128, 128, 128);
     font-size: 0.8vmax;
-
 }
 
 input:focus
@@ -114,18 +112,14 @@ div.alert-form-control.error-message {
     text-align: center;
 }
 
-
-
 /* ------------------------ */
 /* login button          */
 /* -------------------      */
-
 div.button-login-form {
     display: flex;
     width: 100%;
     justify-content: center;
 }
-
  button {
      cursor: pointer;
      border: none;
@@ -180,14 +174,9 @@ a.return-to-home:hover {
 /* ------------------------ */
 /* responsive login form           */
 /* -------------------      */
-
-
 @media screen and (max-width:1300px) {
-    
     div.row {
         width: 40%;
-
-        
     }
 
     input {
@@ -196,12 +185,9 @@ a.return-to-home:hover {
         border-radius: 7px;
         border: 1px solid rgb(128, 128, 128);
         font-size:1.2vmax;
-    
     }
 
 }
-
-
 
 @media screen and (max-width:1200px) {
     
@@ -215,8 +201,6 @@ a.return-to-home:hover {
         width: 55%;
     }
 }
-
-
 
 @media screen and (max-width:440px) {
     

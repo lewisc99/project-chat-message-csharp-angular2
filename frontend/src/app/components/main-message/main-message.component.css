@@ -10,19 +10,16 @@
 
 }
 
-
 div.container {
     display: flex;
     width: 100%;
     height: 100vh;
     flex-direction: column;
-
 }
 
 div.row {
     display: flex;
     width: 100%;
-    
 }
 
 div.nav-item-row {
@@ -48,7 +45,6 @@ div.nav-item {
     width: 50%;
     align-items: center;
     color: rgb(189, 189, 189);
-    
 }
 
 
@@ -59,8 +55,6 @@ div.nav-item {
 div.log-in {
     display: flex;
    justify-content: flex-end;
-   
-
 }
 a.log {
     width: 15%;
@@ -111,7 +105,6 @@ div.container-messages {
     height: 100%;
     flex-direction: column;
     background-color: rgb(56, 44, 44);
-  
 }
 
 
@@ -153,7 +146,6 @@ justify-content: center;}
 
 i.rouded-image-message {
     background-color: rgb(255, 255, 255);
-
     width: 63%;
     height: 80%;
     border: 1px solid rgb(180, 180, 180);
@@ -205,7 +197,6 @@ div.list-messages {
    overflow-wrap: break-word; 
    overflow-y: scroll;
    overflow-x: hidden;
-   
 }
 
 
@@ -216,10 +207,7 @@ div.list-messages {
 div.div-for-messages {
     display: flex;
     flex-wrap: wrap;
-  
     flex-direction: column;
-
-   
 }
 
 div.messages-sent {
@@ -290,7 +278,6 @@ div.message-date {
     font-size: 0.8vmax;
     margin-top: 5px;
     color: gray;
-    
 }
 
 
@@ -329,12 +316,10 @@ div.message-form {
 textarea.input-form {
     width: 86%;
     height: 100%;
-  
     border: none;
     border-radius: 10px 0px 0px 10px ;
     vertical-align: middle;    resize: none;
     background-color: rgb(241, 241, 241);
-
     outline: none;
     font-size: 1vmax;
 }

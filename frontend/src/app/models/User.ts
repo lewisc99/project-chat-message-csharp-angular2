@@ -5,7 +5,6 @@ export class User {
     Email:string;
     Slogan:string;
     lastSeen:string = "18 min";
-    
 }
 
 

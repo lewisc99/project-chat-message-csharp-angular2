@@ -9,7 +9,6 @@ const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"message", component:MainMessageComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

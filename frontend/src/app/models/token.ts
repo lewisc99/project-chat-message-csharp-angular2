@@ -4,7 +4,5 @@ export class Token {
     Expiration:string;
     RefreshToken:string;
     ExpirationRefreshToken:string;
-  
-   
    
 }

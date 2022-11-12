@@ -1,6 +1,5 @@
 import { FormControl, ValidationErrors } from "@angular/forms";
 
-
 export class LoginFormValidators {
 
     static notOnlyWhiteSpace(control:FormControl) :ValidationErrors

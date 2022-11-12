@@ -18,9 +18,6 @@ export class UserService {
   {}
 
   private fullUrl = "https://localhost:44334/api/user/";
-  
-  
-  
 
   private  headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -32,7 +29,6 @@ export class UserService {
    
     });
 
-  
   loginUser(loginForm:Login):Observable<Token>
   {
     let baseUrl = this.fullUrl + "login";
@@ -41,14 +37,11 @@ export class UserService {
         headers: this.headers
     };
     
-
     return  this.httpclient.post<Login>(baseUrl,loginForm,options).pipe(
       map(
         (response:any) =>
         {
-      
          this.tokenStorage.saveToken(response);
-
          console.log("service response  Token: "  + response.Token);
          return response;
         }),catchError(
@@ -57,14 +50,11 @@ export class UserService {
             console.log("service error: " + error.message);
             return throwError(error);
           })
-
     );
   }
 
  public getUsers():Observable<User[]> //the return 
   {
-    
-
     
     var headerGetUser = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -74,7 +64,6 @@ export class UserService {
       'Access-Control-Allow-Origin':'*',
       'Authorization': 'Bearer ' + this.tokenStorage.getToken()
       });
-
 
     var options = {
       headers:headerGetUser
@@ -94,8 +83,6 @@ export class UserService {
           }
         )
     )
-
-   
   }
 
 }

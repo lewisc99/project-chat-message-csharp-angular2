@@ -1,6 +1,4 @@
 import { User } from "src/app/models/User";
-
-
  export interface getToken 
 {
     Token:string;
@@ -9,8 +7,6 @@ import { User } from "src/app/models/User";
     RefreshToken:string;
     ExpirationRefreshToken:string;
 }
-
-
 export interface getUsers
 {
     result: User[];

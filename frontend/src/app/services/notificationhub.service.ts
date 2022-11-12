@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
-import { BehaviorSubject, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Subject} from 'rxjs';
 import { Message } from '../models/message';
 
 @Injectable({
@@ -10,39 +10,29 @@ import { Message } from '../models/message';
 export class NotificationHubService {
 
   constructor(  ) { 
-    
     this.initConnection();
-  }
+    }
 
   private connectionId:string;
   private hubConnection!: HubConnection;
+  public messages: Subject<Message> = new BehaviorSubject<Message>({});
+  public brodcast: Subject<string> = new BehaviorSubject<string>("");
 
-
- public messages: Subject<Message> = new BehaviorSubject<Message>({});
- public brodcast: Subject<string> = new BehaviorSubject<string>("");
-
- 
-
-  
-
-  private initConnection(): void {
+  private initConnection(): void 
+  {
+    let hubConnectionUrl = "https://localhost:44334/notify";
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl( "https://localhost:44334/"+ "notify")
+      .withUrl(hubConnectionUrl)
       .build();
     this.hubConnection.start().then(() => console.log("Hub connection started"));
   }
-
-
-  
 
   notificationMessage():void 
 {
   this.hubConnection.on("brodcastConnectionId", (data) =>
   {
     this.getConnectionId();
-
     console.log("User: " + data + "connection Id : " + this.connectionId);
-  
     
   })
 }
@@ -55,8 +45,6 @@ export class NotificationHubService {
       this.messages.next(message);
     })
   }
-
-
 
 getConnectionId():void 
 {

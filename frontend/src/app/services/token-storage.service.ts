@@ -1,4 +1,3 @@
-import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -29,6 +28,5 @@ export class TokenStorageService {
   let userId = getObject['UserId'];
   return userId;
   }
-
 
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.V1.Models;
@@ -20,7 +21,7 @@ namespace TalkToApiStudyTest.V1.Repositories
         {
 
 
-            return  _banco.tokens.FirstOrDefault(a => a.RefreshToken == refreshToken
+            return await _banco.tokens.FirstOrDefaultAsync(a => a.RefreshToken == refreshToken
              && a.Utilized == false);
          
         }

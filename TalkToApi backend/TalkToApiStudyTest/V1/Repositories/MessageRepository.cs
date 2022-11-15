@@ -23,15 +23,15 @@ namespace TalkToApiStudyTest.V1.Repositories
 
        public async Task<Message> Get(int id)
         {
-            Message message = _database.Mensagem.FirstOrDefault(message => message.Id == id);
+            Message message =  await Task.FromResult( _database.Mensagem.FirstOrDefault(message => message.Id == id));
             return message;
         }
 
         public async Task<List<Message>> GetMessages(string userOne, string userTwo)
         {
 
-            return    _database.Mensagem.Where(a => (a.FromId == userOne || a.FromId == userTwo) &&
-            (a.ToId == userOne || a.ToId == userTwo)).ToList();
+            return  await  Task.FromResult( _database.Mensagem.Where(a => (a.FromId == userOne || a.FromId == userTwo) &&
+            (a.ToId == userOne || a.ToId == userTwo)).ToList());
 
         }
 

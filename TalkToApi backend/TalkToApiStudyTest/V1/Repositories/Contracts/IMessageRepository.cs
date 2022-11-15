@@ -8,7 +8,7 @@ namespace TalkToApiStudyTest.V1.Repositories.Contracts
     {
         Task<List<Message>> GetMessages(string userOne, string userTwo);
         void Register(Message message);
-        Task<Message> Get(int id);
+         Task<Message>  Get(int id);
         void Update(Message message);
     }
 }

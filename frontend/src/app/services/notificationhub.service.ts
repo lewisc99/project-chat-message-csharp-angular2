@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject} from 'rxjs';
 import { Message } from '../models/message';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class NotificationHubService {
 
@@ -24,16 +24,22 @@ export class NotificationHubService {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(hubConnectionUrl)
       .build();
+
     this.hubConnection.start().then(() => console.log("Hub connection started"));
   }
 
+  public downConnection()
+  {
+    this.hubConnection.stop().then( () => console.log("Hub connectin off"));
+  }
+  
+  
   notificationMessage():void 
 {
   this.hubConnection.on("brodcastConnectionId", (data) =>
   {
     this.getConnectionId();
     console.log("User: " + data + "connection Id : " + this.connectionId);
-    
   })
 }
 
@@ -64,5 +70,4 @@ getConnectionId():void
   {
     this.connectionId = "";
   }
-
 }

@@ -29,4 +29,9 @@ export class TokenStorageService {
   return userId;
   }
 
+  public cleanToken():void
+  {
+      this.storageToken.removeItem("token");
+  }
+
 }

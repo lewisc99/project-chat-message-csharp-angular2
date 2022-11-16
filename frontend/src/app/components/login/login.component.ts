@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy{
           password: new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30), LoginFormValidators.notOnlyWhiteSpace]),
         })
       });
+      this.loginSubscription = new Subscription();
   }
   
   ngOnDestroy(): void {
@@ -60,7 +61,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       const password = this.loginForm.get("login")?.get("password")?.value;
        this.login = new Login(email,password);
   
-      
       this.loginSubscription = this.userService.loginUser(this.login).subscribe(
          
          data =>  {

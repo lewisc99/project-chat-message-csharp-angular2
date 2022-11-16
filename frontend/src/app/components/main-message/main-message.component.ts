@@ -14,7 +14,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./main-message.component.css'],
  
 })
-export class MainMessageComponent implements OnInit, OnDestroy, AfterContentInit {
+export class MainMessageComponent implements OnInit, OnDestroy{
 
   constructor(private storageToken:TokenStorageService, private messageService:MessageService,
     private notificationHubService:NotificationHubService, private fb:FormBuilder, private router:Router, private userService: UserService) { }
@@ -25,9 +25,9 @@ export class MainMessageComponent implements OnInit, OnDestroy, AfterContentInit
   public firstUserId:string = this.storageToken.getUserId();
   public secondUserById:string;
   public formGroup:FormGroup;
-  private messageSubscription:Subscription = new Subscription();
-  private sendMessageSubscription:Subscription = new Subscription();
-  private getMessageHubSubscription:Subscription = new Subscription();
+  private messageSubscription:Subscription;
+  private sendMessageSubscription:Subscription;
+  private getMessageHubSubscription:Subscription;
 
   ngOnInit(): void {
 
@@ -36,19 +36,24 @@ export class MainMessageComponent implements OnInit, OnDestroy, AfterContentInit
     
      this.formGroup  = this.fb.group({
       messageText:  new FormControl("",Validators.maxLength(200))
-    })
+    });
+
+     this.messageSubscription = new Subscription();
+     this.sendMessageSubscription = new Subscription();
+     this.getMessageHubSubscription = new Subscription();
+
   }
 
-  ngAfterContentInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
 
   ngOnDestroy(): void {
-    // this.messageSubscription.unsubscribe();
-    // this.sendMessageSubscription.unsubscribe();
-    // this.getMessageHubSubscription.unsubscribe();
+
+    this.messageSubscription.unsubscribe();
+    this.sendMessageSubscription.unsubscribe();
+    this.getMessageHubSubscription.unsubscribe();
   }
+
+
  
 
   SelectUserMessage(secondUserId:string)
@@ -109,6 +114,9 @@ export class MainMessageComponent implements OnInit, OnDestroy, AfterContentInit
       if (data.logout)
       {
         console.log("main-message-logout");
+        this.notificationHubService.DownConnectionId();
+        this.notificationHubService.downConnection();
+        this.storageToken.cleanToken();
       }
       this.router.navigate(["..","logout",])
     }, 

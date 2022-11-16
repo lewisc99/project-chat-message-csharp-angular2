@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Login } from '../models/login';
 import { MessageService } from './message.service';
-import { getToken, getUsers } from '../interfaces/interfaces';
+import {  getUsers } from '../interfaces/interfaces';
 import { User } from '../models/User';
 import { Token } from '../models/token';
 import { TokenStorageService } from './token-storage.service';
@@ -16,6 +16,8 @@ export class UserService {
 
   constructor(private httpclient:HttpClient, private messageService: MessageService, private tokenStorage:TokenStorageService)
   {}
+
+   userIslogout:boolean = false;
 
   private fullUrl = "https://localhost:44334/api/user/";
 
@@ -83,6 +85,41 @@ export class UserService {
           }
         )
     )
+  }
+
+  public logout():Observable<any>
+  {
+    var headerGetUser = new HttpHeaders({
+      'Content-Type': 'application/json',
+      "Accept":"application/json",
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'crossDomain': 'true',
+      'Access-Control-Allow-Origin':'*',
+      'Authorization': 'Bearer ' + this.tokenStorage.getToken()
+      });
+
+      var options = {
+        headers:headerGetUser
+      };
+
+      return this.httpclient.get(this.fullUrl + "logout", options).pipe(
+        map(
+          (response:any) =>
+          {
+            if (response.logout)
+            {
+              this.userIslogout = true;
+            }
+            return response;
+          }),
+          catchError(
+            (error:any) =>
+            {
+              console.log("error to logout service" + error);
+              return throwError(error);
+            }
+          )
+        )
   }
 
 }

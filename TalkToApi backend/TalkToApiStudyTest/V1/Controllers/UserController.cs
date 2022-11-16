@@ -176,8 +176,9 @@ namespace TalkToApiStudyTest.V1.Controllers
         [HttpGet("logout")]
         public async Task<ActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return Ok("User sign Out");
+            await  _signInManager.SignOutAsync();
+            object logout = new { logout = true };
+            return Ok(logout);
         }
 
 

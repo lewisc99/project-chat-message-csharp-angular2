@@ -1,29 +1,33 @@
-import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Message } from 'src/app/models/message';
 import { MessageService } from 'src/app/services/message.service';
 import { NotificationHubService } from 'src/app/services/notificationhub.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-main-message',
   templateUrl: './main-message.component.html',
-  styleUrls: ['./main-message.component.css']
+  styleUrls: ['./main-message.component.css'],
+ 
 })
-export class MainMessageComponent implements OnInit, OnDestroy {
+export class MainMessageComponent implements OnInit, OnDestroy, AfterContentInit {
 
   constructor(private storageToken:TokenStorageService, private messageService:MessageService,
-    private notificationHubService:NotificationHubService, private fb:FormBuilder) { }
+    private notificationHubService:NotificationHubService, private fb:FormBuilder, private router:Router, private userService: UserService) { }
+
   
 
   public messages:Message[] = [];
   public firstUserId:string = this.storageToken.getUserId();
   public secondUserById:string;
   public formGroup:FormGroup;
-  private messageSubscription:Subscription;
-  private sendMessageSubscription:Subscription;
-  private getMessageHubSubscription:Subscription;
+  private messageSubscription:Subscription = new Subscription();
+  private sendMessageSubscription:Subscription = new Subscription();
+  private getMessageHubSubscription:Subscription = new Subscription();
 
   ngOnInit(): void {
 
@@ -35,11 +39,15 @@ export class MainMessageComponent implements OnInit, OnDestroy {
     })
   }
 
+  ngAfterContentInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
 
   ngOnDestroy(): void {
-    this.messageSubscription.unsubscribe();
-    this.sendMessageSubscription.unsubscribe();
-    this.getMessageHubSubscription.unsubscribe();
+    // this.messageSubscription.unsubscribe();
+    // this.sendMessageSubscription.unsubscribe();
+    // this.getMessageHubSubscription.unsubscribe();
   }
  
 
@@ -48,7 +56,7 @@ export class MainMessageComponent implements OnInit, OnDestroy {
     this.secondUserById = secondUserId;
 
     this.messageSubscription =  this.messageService.getUserMessages(this.firstUserId,secondUserId).subscribe(
-      (response:any) =>
+      async (response:any) =>
       {
        console.log(response);
        console.log("main-message messages");
@@ -61,7 +69,7 @@ export class MainMessageComponent implements OnInit, OnDestroy {
     )
 
     this.getMessageHubSubscription =  this.notificationHubService.messages.subscribe(
-      (data:any) =>
+      async ( data:any) =>
       {
        console.log("from container main-messages");
        var message:Message = new Message(data.fromId, data.toId,data.text);
@@ -79,7 +87,7 @@ export class MainMessageComponent implements OnInit, OnDestroy {
     console.log(message);
     this.formGroup.controls['messageText'].setValue('');
    this.sendMessageSubscription =   this.messageService.sendMessageToUser(message).subscribe(
-        (response:any) =>
+    async (response:any) =>
         {
           console.log("new Message Added");
           console.log(response);
@@ -93,7 +101,24 @@ export class MainMessageComponent implements OnInit, OnDestroy {
 
   }
 
-
+  logout()
+  {
+    this.userService.logout().subscribe(
+    (data:any) =>
+    {
+      if (data.logout)
+      {
+        console.log("main-message-logout");
+      }
+      this.router.navigate(["..","logout",])
+    }, 
+    (error:any) =>
+    {
+      console.log("main-message-logout error");
+    }
+    )
+    
+  }
 
 
 

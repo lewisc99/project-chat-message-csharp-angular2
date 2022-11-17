@@ -33,10 +33,10 @@ export class UsersMessagesComponent implements OnInit {
       })
   }
 
-  SelectUserMessage(secondUserId:string)
+  SelectUserMessage(secondUserId:string, username:string)
   {
     console.log(secondUserId);
-    this.secondUserId.emit(secondUserId);
+    this.secondUserId.emit({secondUserId,username});
   }
 
 }

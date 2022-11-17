@@ -3,8 +3,7 @@
     <div class="whole-messages">
     <div class="message-title-user"><p>Messages</p></div>
         <div class="whole-user-messages">
-            <div class="user-messages" *ngFor="let user of users" (click)="SelectUserMessage(user.Id)">
-            
+            <div class="user-messages" *ngFor="let user of users" (click)="SelectUserMessage(user.Id, user.Name)">
             <div class="user-image">
                 <i class="rounded-image"></i>
             </div>

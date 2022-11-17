@@ -28,6 +28,7 @@ export class MainMessageComponent implements OnInit, OnDestroy{
   private messageSubscription:Subscription;
   private sendMessageSubscription:Subscription;
   private getMessageHubSubscription:Subscription;
+  public username:string = "";
 
   ngOnInit(): void {
 
@@ -56,16 +57,17 @@ export class MainMessageComponent implements OnInit, OnDestroy{
 
  
 
-  SelectUserMessage(secondUserId:string)
+  SelectUserMessage(userInfo:any)
   {
-    this.secondUserById = secondUserId;
-
-    this.messageSubscription =  this.messageService.getUserMessages(this.firstUserId,secondUserId).subscribe(
+    this.secondUserById = userInfo.secondUserId;
+    this.username = userInfo.username;
+    this.messageSubscription =  this.messageService.getUserMessages(this.firstUserId,this.secondUserById).subscribe(
       async (response:any) =>
       {
        console.log(response);
        console.log("main-message messages");
        return this.messages = response;
+      
       
       },(error:any) =>
       {

@@ -36,7 +36,7 @@ export class MainMessageComponent implements OnInit, OnDestroy{
     this.notificationHubService.userNotified();
     
      this.formGroup  = this.fb.group({
-      messageText:  new FormControl("",Validators.maxLength(200))
+      messageText:  new FormControl("",[Validators.maxLength(200)])
     });
 
      this.messageSubscription = new Subscription();
@@ -89,10 +89,17 @@ export class MainMessageComponent implements OnInit, OnDestroy{
 
  sendTextMessage()
   {
+
     var messageText =  this.formGroup.controls['messageText'].value;
+
+    if (messageText == "")
+    {
+      return;
+    }
     var message:Message  = new Message(this.firstUserId,this.secondUserById,messageText);
     console.log(message);
     this.formGroup.controls['messageText'].setValue('');
+
    this.sendMessageSubscription =   this.messageService.sendMessageToUser(message).subscribe(
     async (response:any) =>
         {

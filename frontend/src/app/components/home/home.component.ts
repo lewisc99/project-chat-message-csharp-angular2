@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  tokenIsValid:boolean
+  tokenIsValid:boolean = false;
   constructor(private TokenStorageService: TokenStorageService, private userService: UserService, private notificationHubService:NotificationHubService, private storageToken:TokenStorageService,
     private router:Router) { }
   ngOnInit(): void {
@@ -20,11 +20,15 @@ export class HomeComponent implements OnInit {
 
   userIsLogIn()
   {
-    if (this.TokenStorageService.getToken() == "")
+    
+    if (!this.TokenStorageService.isTokenValid)
     {
       this.tokenIsValid = false;
     }
-    this.tokenIsValid = true;
+    else
+    {
+      this.tokenIsValid = true;
+    }
   }
 
 
@@ -40,7 +44,8 @@ export class HomeComponent implements OnInit {
         this.notificationHubService.downConnection();
         this.storageToken.cleanToken();
       }
-      this.router.navigate(["..","logout",])
+      this.tokenIsValid = false;
+      
     }, 
     (error:any) =>
     {

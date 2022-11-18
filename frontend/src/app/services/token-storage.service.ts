@@ -5,7 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class TokenStorageService {
 
-  constructor() { }
+  constructor() { 
+    this.isTokenValid =false;
+  }
+  public isTokenValid:boolean;
 
   private storageToken:Storage = sessionStorage;
 
@@ -13,6 +16,7 @@ export class TokenStorageService {
   {
     this.storageToken.removeItem("token");
     this.storageToken.setItem("token",JSON.stringify(token));
+    this.isTokenValid = true;
   }
 
   public getToken():string 
@@ -20,12 +24,17 @@ export class TokenStorageService {
     let getObject  = JSON.parse( this.storageToken.getItem("token")!);
 
     let token = getObject['Token'];
-    if (!token)
+    if ( token == "")
     {
         return "";
     }
+    
+    this.isTokenValid = true;
     return token;
   }
+
+
+
 
   public getUserId():string
   {
@@ -37,6 +46,7 @@ export class TokenStorageService {
   public cleanToken():void
   {
       this.storageToken.removeItem("token");
+      this.isTokenValid = false;
   }
 
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '../../services/token-storage.service';
+import { UserService } from '../../services/user.service';
+import { NotificationHubService } from '../../services/notificationhub.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +11,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
-  
-  ngOnInit(): void {}
+  tokenIsValid:boolean
+  constructor(private TokenStorageService: TokenStorageService, private userService: UserService, private notificationHubService:NotificationHubService, private storageToken:TokenStorageService,
+    private router:Router) { }
+  ngOnInit(): void {
+      this.userIsLogIn();
+  }
 
+  userIsLogIn()
+  {
+    if (this.TokenStorageService.getToken() == "")
+    {
+      this.tokenIsValid = false;
+    }
+    this.tokenIsValid = true;
+  }
+
+
+  logout()
+  {
+    this.userService.logout().subscribe(
+    (data:any) =>
+    {
+      if (data.logout)
+      {
+        console.log("main-message-logout");
+        this.notificationHubService.DownConnectionId();
+        this.notificationHubService.downConnection();
+        this.storageToken.cleanToken();
+      }
+      this.router.navigate(["..","logout",])
+    }, 
+    (error:any) =>
+    {
+      console.log("main-message-logout error");
+    }
+    )
+    
+  }
+
+  
 }

@@ -20,12 +20,19 @@ export class NotificationHubService {
 
   private initConnection(): void 
   {
+    try {
+
+  
     let hubConnectionUrl = "https://localhost:44334/notify";
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(hubConnectionUrl)
       .build();
+    }catch(error)
+    {
+      console.log("error");
+    }
 
-    this.hubConnection.start().then(() => console.log("Hub connection started"));
+    this.hubConnection.start().then(() => console.log("Hub connection started")).catch((error) => console.error(error + " connection refused"));
   }
 
   public downConnection()

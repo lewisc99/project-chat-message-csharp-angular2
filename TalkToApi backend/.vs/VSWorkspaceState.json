@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TalkToApiStudyTest"
   ],
-  "SelectedNode": "\\TalkToApiStudyTest.sln",
+  "SelectedNode": "\\TalkToApiStudyTest\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }

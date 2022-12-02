@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainMessageComponent } from './components/main-message/main-message.component';
 import { UsersMessagesComponent } from './components/main-message/users-messages/users-messages.component';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { UsersMessagesComponent } from './components/main-message/users-messages
     HomeComponent,
     LoginComponent,
     MainMessageComponent,
-    UsersMessagesComponent
+    UsersMessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,7 @@ import { UsersMessagesComponent } from './components/main-message/users-messages
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

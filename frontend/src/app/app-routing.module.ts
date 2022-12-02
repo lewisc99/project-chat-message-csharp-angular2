@@ -7,7 +7,7 @@ import { MainMessageComponent } from './components/main-message/main-message.com
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"",component:HomeComponent},
-  {path:"message", component:MainMessageComponent},
+  {path:"message", component:MainMessageComponent,canActivate:[AuthGuard]},
   {path:"logout", redirectTo:"",pathMatch:"full"}
 ];
 @NgModule({

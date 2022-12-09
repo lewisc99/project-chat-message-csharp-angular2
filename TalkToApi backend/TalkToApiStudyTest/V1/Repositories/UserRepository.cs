@@ -21,6 +21,8 @@ namespace TalkToApiStudyTest.V1.Repositories
         {
             ApplicationUser user = await _userManager.FindByEmailAsync(email);
 
+           
+
             if(await _userManager.CheckPasswordAsync(user,password))
             {
                 return user;
@@ -34,6 +36,8 @@ namespace TalkToApiStudyTest.V1.Repositories
         public async Task<ApplicationUser> Get(string userId)
         {
             return await _userManager.FindByIdAsync(userId);
+
+
         }
 
         public void Register(ApplicationUser user, string password)

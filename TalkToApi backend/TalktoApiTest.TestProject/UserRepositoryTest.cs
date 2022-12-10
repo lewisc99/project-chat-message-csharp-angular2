@@ -3,7 +3,6 @@ using Moq;
 using NUnit.Framework;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories;
-using TalkToApiStudyTest.V1.Repositories.Contracts;
 
 namespace TalktoApiTest.TestProject
 {
@@ -13,7 +12,7 @@ namespace TalktoApiTest.TestProject
     {
 
 
-        private Mock<UserManager<ApplicationUser>> mockUserManager;
+        private readonly Mock<UserManager<ApplicationUser>> mockUserManager;
         private UserRepository _userRepository;
 
 
@@ -25,25 +24,32 @@ namespace TalktoApiTest.TestProject
 
 
         [Test]
-        public void getUser_whenCalled_ReturnUser()
+        public void get_whenCalled_ReturnUser()
         {
 
             ApplicationUser user = new ApplicationUser();
 
             user.UserName ="lewis";
             user.Email = "lewis@gmail.com";
+                
 
-          
 
-            mockUserManager.Setup(fr => fr.FindByEmailAsync("lewis@gmail.com")).ReturnsAsync(new ApplicationUser());
+            mockUserManager.Setup(fr => fr.FindByEmailAsync("lewis@gmail.com")).ReturnsAsync(user);
 
 
             var result = _userRepository.Get("lewis@gmail.com").Result;
 
 
-            Assert.That(result, Is.Null);
+            Assert.That(result, Is.EqualTo(user));
 
 
         }
+
+        [Test]
+        public void register_whenCalled_CreateANewUser()
+        {
+
+        }
+
     }
 }

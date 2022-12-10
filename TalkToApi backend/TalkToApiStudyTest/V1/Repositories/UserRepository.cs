@@ -36,8 +36,6 @@ namespace TalkToApiStudyTest.V1.Repositories
         public async Task<ApplicationUser> Get(string userId)
         {
             return await _userManager.FindByIdAsync(userId);
-
-
         }
 
         public void Register(ApplicationUser user, string password)

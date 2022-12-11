@@ -88,18 +88,5 @@ namespace TalktoApiTest.TestProject.mocking
 
         }
 
-
-        [Test]
-        public void register_WhenCalled_ReturnNewToken()
-        {
-
-            Mock<ITokenRepository>  MockRepository = new Mock<ITokenRepository>();
-
-            Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
-
-            MockRepository.
-
-        }
-
     }
 }

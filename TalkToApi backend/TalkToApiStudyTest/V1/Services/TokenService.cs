@@ -62,7 +62,6 @@ namespace TalkToApiStudyTest.V1.Services
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.GetType());  // Displays the type of exception
                 throw new Exception(e.Message);
             }
 

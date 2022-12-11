@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services.Contracts;
@@ -25,13 +25,15 @@ namespace TalkToApiStudyTest.V1.Services
                 return await _repository.Get(refreshToken);
 
             }
+
+            catch(SqlException sqlException)
+            {
+               throw new Exception(sqlException.Message);
+            }
             catch(Exception e)
             {
-                Debug.WriteLine(e.GetType());  // Displays the type of exception
                 throw new Exception(e.Message);
             }
-
-
 
         }
 
@@ -40,6 +42,7 @@ namespace TalkToApiStudyTest.V1.Services
 
             try
             {
+                 
                 _repository.Register(token);
 
             }

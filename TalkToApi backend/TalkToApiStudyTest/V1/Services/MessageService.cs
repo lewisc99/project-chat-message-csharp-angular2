@@ -25,31 +25,27 @@ namespace TalkToApiStudyTest.V1.Services
         
        public async Task<Message> Get(int id)
         {
-            Message message =  await Task.FromResult( _repository.Mensagem.FirstOrDefault(message => message.Id == id));
-            return message;
+
+          return await _repository.Get(id);
           
         }
 
         public async Task<List<Message>> GetMessages(string userOne, string userTwo)
         {
 
-            return  await  Task.FromResult( _repository.Mensagem.Where(a => (a.FromId == userOne || a.FromId == userTwo) &&
-            (a.ToId == userOne || a.ToId == userTwo)).ToList());
+            return await   _repository.GetMessages(userOne, userTwo);
 
         }
 
         public void Register(Message message)
         {
 
-            message.Created = DateTime.Now;
-            _repository.Mensagem.Add(message);
-            _repository.SaveChanges();
+            _repository.Register(message);
         }
 
         public void Update(Message message)
         {
-            _repository.Mensagem.Update(message);
-            _repository.SaveChanges();
+            _repository.Update(message);
         }
     }
 }

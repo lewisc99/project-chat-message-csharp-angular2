@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using TalkToApiStudyTest.Helpers.Contants;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
-using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.Helpers.Token;
+using TalkToApiStudyTest.V1.Services.Contracts;
 
-#pragma warning disable 
+#pragma warning disable
 namespace TalkToApiStudyTest.V1.Controllers
 {
     [Route("api/[controller]")]

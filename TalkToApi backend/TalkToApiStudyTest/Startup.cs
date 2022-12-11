@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -17,8 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -30,6 +27,8 @@ using TalkToApiStudyTest.Hub;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
+using TalkToApiStudyTest.V1.Services;
+using TalkToApiStudyTest.V1.Services.Contracts;
 
 namespace TalkToApiStudyTest
 {
@@ -81,6 +80,12 @@ namespace TalkToApiStudyTest
                 ) 
                 .AddEntityFrameworkStores<TalkToContext>()
                 .AddDefaultTokenProviders();
+
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();

@@ -11,10 +11,10 @@ using TalkToApiStudyTest.Helpers.Contants;
 using TalkToApiStudyTest.Hub;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
-using TalkToApiStudyTest.V1.Repositories.Contracts;
+using TalkToApiStudyTest.V1.Services.Contracts;
 
 
-#pragma warning disable 
+#pragma warning disable
 namespace TalkToApiStudyTest.V1.Controllers
 {
     [ApiController]
@@ -57,6 +57,7 @@ namespace TalkToApiStudyTest.V1.Controllers
                 result.links.Add(new LinkDTO("_self", Url.Link("GetMessages", new { userOne = userOne, userTwo = userTwo }), "GET"));
 
                 return Ok(result);
+
             }
              else
             {

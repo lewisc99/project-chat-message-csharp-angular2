@@ -138,7 +138,4 @@ export class MainMessageComponent implements OnInit, OnDestroy{
   }
 
 
-
-
-
 }

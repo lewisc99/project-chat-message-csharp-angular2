@@ -2,11 +2,12 @@
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Linq;
 using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
+using TalkToApiStudyTest.V1.Services;
+using TalkToApiStudyTest.V1.Services.Contracts;
 
 namespace TalktoApiTest.TestProject.mocking
 {
@@ -15,10 +16,12 @@ namespace TalktoApiTest.TestProject.mocking
     class TokingRepositoryTests
     {
 
+ 
+
         [SetUp]
         public void SetUp()
         {
-        // _tokenRepository = new TokenRepository(_talkContext.Object);
+
 
         }
 
@@ -26,22 +29,15 @@ namespace TalktoApiTest.TestProject.mocking
         public  void get_WhenCalled_returnToken()
         {
 
-            var mockContext = new TalkToContext(new DbContextOptions<TalkToContext>());
-
-            // Inject the mock DbContext into the repository
-            var repository = new Mock<ITokenService>();
+             var repository = new Mock<ITokenRepository>();
         
+             Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
 
-            Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
+             repository.Setup(method => method.Get(It.IsAny<string>())).ReturnsAsync(newToken);
 
-            repository.Setup(method => method.Get(It.IsAny<string>())).ReturnsAsync(newToken);
+            var result = new TokenService(repository.Object);
 
-            var _repository = new TokenRepository(mockContext);
-
-           var result  = _repository.Get("").Result;
-
-
-            Assert.That(result, Is.EqualTo(newToken));
+            Assert.That(result.Get(It.IsAny<string>()).Result, Is.EqualTo(newToken));
 
 
         }

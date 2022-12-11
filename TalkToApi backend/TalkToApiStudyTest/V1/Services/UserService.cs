@@ -6,14 +6,14 @@ using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 
 #pragma warning disable 
-namespace TalkToApiStudyTest.V1.Repositories
+namespace TalkToApiStudyTest.V1.Services
 {
-    public class UserRepository: IUserRepository
+    public class UserService:IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
      
 
-        public UserRepository(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

@@ -24,13 +24,13 @@ namespace TalkToApiStudyTest.V1.Controllers
     [EnableCors(PolicyName = "anyMethod")]
     public class UserController: ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ITokenRepository _tokenRepository;
+        private readonly ITokenService _tokenRepository;
         private readonly IMapper _mapper;
-        public UserController(IUserRepository userRepository, SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, ITokenRepository tokenRepository,IMapper mapper)
+        public UserController(IUserService userRepository, SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager, ITokenService tokenRepository,IMapper mapper)
         {
             _userRepository = userRepository;
             _signInManager = signInManager;

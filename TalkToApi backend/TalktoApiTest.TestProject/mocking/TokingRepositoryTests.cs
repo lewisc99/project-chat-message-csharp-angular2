@@ -29,7 +29,7 @@ namespace TalktoApiTest.TestProject.mocking
             var mockContext = new TalkToContext(new DbContextOptions<TalkToContext>());
 
             // Inject the mock DbContext into the repository
-            var repository = new Mock<ITokenRepository>();
+            var repository = new Mock<ITokenService>();
         
 
             Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
@@ -49,7 +49,7 @@ namespace TalktoApiTest.TestProject.mocking
         [Test]
         public void get_WhenCalled_ReturnException()
         {
-            Mock<ITokenRepository> mockRepo = new Mock<ITokenRepository>();
+            Mock<ITokenService> mockRepo = new Mock<ITokenService>();
 
 
             Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);

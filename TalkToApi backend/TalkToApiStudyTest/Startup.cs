@@ -82,9 +82,9 @@ namespace TalkToApiStudyTest
                 .AddEntityFrameworkStores<TalkToContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITokenRepository, TokenRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IMessageService, MessageService>();
 
             services.AddControllers(config =>
             {

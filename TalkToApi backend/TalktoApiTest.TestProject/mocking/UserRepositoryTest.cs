@@ -13,7 +13,7 @@ namespace TalktoApiTest.mocking.TestProject
 
 
         private readonly Mock<UserManager<ApplicationUser>> mockUserManager;
-        private UserRepository _userRepository;
+        private UserService _userRepository;
 
 
         [SetUp]

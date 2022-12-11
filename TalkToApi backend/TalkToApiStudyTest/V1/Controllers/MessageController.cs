@@ -25,11 +25,11 @@ namespace TalkToApiStudyTest.V1.Controllers
     [EnableCors]
     public class MessageController: ControllerBase
     {
-        private IMessageRepository _messageRepository;
+        private IMessageService _messageRepository;
         private readonly IMapper _mapper;
         private readonly IHubContext<BroadcastHub, IClientHub> _hubContext;
 
-        public MessageController(IMessageRepository messageRepository, IMapper mapper, IHubContext<BroadcastHub,IClientHub> hubContext)
+        public MessageController(IMessageService messageRepository, IMapper mapper, IHubContext<BroadcastHub,IClientHub> hubContext)
         {
             _messageRepository = messageRepository;
             _mapper = mapper;

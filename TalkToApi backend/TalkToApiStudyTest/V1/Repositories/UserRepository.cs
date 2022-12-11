@@ -11,12 +11,14 @@ namespace TalkToApiStudyTest.V1.Repositories
     public class UserRepository:IUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
+     
 
         public UserRepository(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
 
+     
         public async Task<ApplicationUser> Get(string email, string password)
         {
             ApplicationUser user = await _userManager.FindByEmailAsync(email);

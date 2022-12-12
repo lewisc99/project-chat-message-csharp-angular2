@@ -3,7 +3,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TalkToApiStudyTest.V1.Models;
-using TalkToApiStudyTest.V1.Repositories;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services;
 
@@ -152,6 +151,36 @@ namespace TalktoApiTest.TestProject.mocking
             Assert.ThrowsAsync<Exception>(() => result.GetMessages(It.IsAny<string>(), It.IsAny<string>()));
         }
 
+
+        [Test]
+        public void register_WhenCalled_RegisterMessage()
+        {
+            Mock<IMessageRepository> repository = new Mock<IMessageRepository>();
+
+            repository.Setup(method => method.Register(It.IsAny<Message>()));
+
+
+            MessageService result = new MessageService(repository.Object);
+
+
+            Assert.That(result.Get(It.IsAny<int>()).Result, Is.EqualTo(It.IsAny<Message>()));
+        }
+
+        [Test]
+        public void update_WhenCalled_UpdateAMessage()
+        {
+            Mock<IMessageRepository> repository = new Mock<IMessageRepository>();
+
+
+
+            repository.Setup(method => method.Update(It.IsAny<Message>()));
+
+
+            MessageService result = new MessageService(repository.Object);
+
+
+            Assert.That(result.Get(It.IsAny<int>()).Result, Is.EqualTo(It.IsAny<Message>()));
+        }
 
     }
 }

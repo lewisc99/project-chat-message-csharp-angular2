@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TalkToApiStudyTest.Database;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services.Contracts;
@@ -26,26 +24,60 @@ namespace TalkToApiStudyTest.V1.Services
        public async Task<Message> Get(int id)
         {
 
-          return await _repository.Get(id);
-          
+          try
+            {
+                return await _repository.Get(id);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public async Task<List<Message>> GetMessages(string userOne, string userTwo)
         {
 
-            return await   _repository.GetMessages(userOne, userTwo);
+            try
+            {
+                return await _repository.GetMessages(userOne, userTwo);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
         }
 
         public void Register(Message message)
         {
 
-            _repository.Register(message);
+            try
+            {
+                  _repository.Register(message);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public void Update(Message message)
         {
-            _repository.Update(message);
+
+            try
+            {
+                _repository.Update(message);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
     }
 }

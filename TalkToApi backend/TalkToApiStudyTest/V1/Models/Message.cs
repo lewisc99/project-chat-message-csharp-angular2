@@ -26,5 +26,8 @@ namespace TalkToApiStudyTest.V1.Models
         public string Text { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
+
+
+
     }
 }

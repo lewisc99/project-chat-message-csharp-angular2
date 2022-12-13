@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services.Contracts;
@@ -19,19 +20,45 @@ namespace TalkToApiStudyTest.V1.Services
      
         public async Task<ApplicationUser> Get(string email, string password)
         {
-           return await _userRepository.Get(email, password);
+            try
+            {
+                return await _userRepository.Get(email, password);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public async Task<ApplicationUser> Get(string userId)
         {
-           return await _userRepository.Get(userId);
+            try
+            {
+                return await _userRepository.Get(userId);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
 
         }
 
         public void Register(ApplicationUser user, string password)
         {
 
-            _userRepository.Register(user, password);
+            try
+            {
+                _userRepository.Register(user, password);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
     }
 }

@@ -13,7 +13,6 @@ namespace TalktoApiTest.mocking.TestProject
 
 
         private readonly Mock<UserManager<ApplicationUser>> mockUserManager;
-    //    private UserService _userRepository;
 
 
         [SetUp]
@@ -27,20 +26,7 @@ namespace TalktoApiTest.mocking.TestProject
         public void get_whenCalled_ReturnUser()
         {
 
-            ApplicationUser user = new ApplicationUser();
-
-            user.UserName ="lewis";
-            user.Email = "lewis@gmail.com";
-                
-
-
-            mockUserManager.Setup(fr => fr.FindByEmailAsync("lewis@gmail.com")).ReturnsAsync(user);
-
-
-           // var result = _userRepository.Get("lewis@gmail.com").Result;
-
-
-          //  Assert.That(result, Is.EqualTo(user));
+            Mock<UserRepository> repository = new  Mock<UserRepository>();
 
 
 

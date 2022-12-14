@@ -4,7 +4,6 @@ using System;
 using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services;
-using TalkToApiStudyTest.V1.Services.Contracts;
 
 namespace TalktoApiTest.TestProject.Mocking.Services
 {
@@ -13,44 +12,30 @@ namespace TalktoApiTest.TestProject.Mocking.Services
     class TokenRepositoryTests
     {
 
- 
+        Mock<ITokenRepository> repository;
+        Token newToken;
+        TokenService result;
 
         [SetUp]
         public void SetUp()
         {
-
-
+            repository = new Mock<ITokenRepository>();
+            newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
+            repository.Setup(method => method.Get(It.IsAny<string>())).ReturnsAsync(newToken);
+            result = new TokenService(repository.Object);
         }
-
 
         [Test]
         public  void get_WhenCalled_returnToken()
         {
-
-             var repository = new Mock<ITokenRepository>();
-        
-             Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
-
-             repository.Setup(method => method.Get(It.IsAny<string>())).ReturnsAsync(newToken);
-
-            var result = new TokenService(repository.Object);
-
             Assert.That(result.Get(It.IsAny<string>()).Result, Is.EqualTo(newToken));
-
-
         }
 
 
         [Test]
         public void get_WhenCalled_NotNull()
         {
-
-            var repository = new Mock<ITokenRepository>();
-
-            Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
-
             repository.Setup(method => method.Get(It.IsAny<string>())).ReturnsAsync(newToken);
-
             var result = new TokenService(repository.Object);
 
             Assert.NotNull(result);
@@ -60,14 +45,9 @@ namespace TalktoApiTest.TestProject.Mocking.Services
         [Test]
         public void get_WhenCalled_ThrowsException()
         {
-            var repository = new Mock<ITokenRepository>();
-
-            Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
+            Assert.That(result.Get(It.IsAny<string>()).Result, Is.EqualTo(newToken));
 
             repository.Setup(method => method.Get(It.IsAny<string>())).Throws(new Exception());
-
-            var result = new TokenService(repository.Object);
-
             Assert.ThrowsAsync<Exception>(() =>  result.Get(It.IsAny<string>()) );
         }
 
@@ -76,19 +56,9 @@ namespace TalktoApiTest.TestProject.Mocking.Services
         [Test]
         public void get_WhenCalled_ReturnException()
         {
-            Mock<ITokenService> mockRepo = new Mock<ITokenService>();
-
-
-            Token newToken = new Token("", new ApplicationUser(), false, DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), DateTime.Now);
-
-            var expected = mockRepo.Setup(m => m.Get(Guid.NewGuid().ToString())).ReturnsAsync(newToken);
-
+            var expected = repository.Setup(m => m.Get(Guid.NewGuid().ToString())).ReturnsAsync(newToken);
             Assert.AreNotEqual(expected, Is.EqualTo(newToken));
-
-
         }
-
-
 
     }
 }

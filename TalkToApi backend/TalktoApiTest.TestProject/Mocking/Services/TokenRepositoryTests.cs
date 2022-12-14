@@ -6,7 +6,7 @@ using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services;
 using TalkToApiStudyTest.V1.Services.Contracts;
 
-namespace TalktoApiTest.TestProject.mocking
+namespace TalktoApiTest.TestProject.Mocking.Services
 {
 
     [TestFixture]

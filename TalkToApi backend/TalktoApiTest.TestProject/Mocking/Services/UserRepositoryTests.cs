@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using System;
 using TalkToApiStudyTest.V1.Models;
-using TalkToApiStudyTest.V1.Repositories;
 using TalkToApiStudyTest.V1.Repositories.Contracts;
 using TalkToApiStudyTest.V1.Services;
 
-namespace TalktoApiTest.mocking.TestProject
+namespace TalktoApiTest.TestProject.Mocking.Services
 {
 
     [TestFixture]

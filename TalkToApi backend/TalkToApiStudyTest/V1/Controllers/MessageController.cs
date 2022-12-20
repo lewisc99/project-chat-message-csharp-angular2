@@ -36,6 +36,12 @@ namespace TalkToApiStudyTest.V1.Controllers
             _hubContext = hubContext;
         }
 
+        public MessageController(IMessageService messageRepository)
+        {
+            _messageRepository = messageRepository;
+        }
+
+
         [MapToApiVersion("1.0")]
         [HttpGet("{userOne}/{userTwo}", Name = "GetMessages")]
         public async Task<ActionResult> GetMessages(string userOne, string userTwo,

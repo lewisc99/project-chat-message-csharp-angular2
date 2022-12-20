@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\TalkToApiStudyTest"
+    "\\TalkToApiStudyTest",
+    "\\TalkToApiStudyTest\\Hub"
   ],
-  "SelectedNode": "\\TalkToApiStudyTest.sln",
+  "SelectedNode": "\\TalkToApiStudyTest\\Hub\\IClientHub.cs",
   "PreviewInSolutionExplorer": false
 }

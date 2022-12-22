@@ -145,7 +145,7 @@ namespace TalkToApiStudyTest.V1.Controllers
         [HttpGet]
         public async Task<ActionResult<Message>> Get(int id)
         {
-            var message = _messageRepository.Get(id);
+            var message =await _messageRepository.Get(id);
 
             return Ok(message);
         }

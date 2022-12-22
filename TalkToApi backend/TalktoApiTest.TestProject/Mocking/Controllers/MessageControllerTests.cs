@@ -20,23 +20,20 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         {
             Mock<IMessageService> repository = new  Mock<IMessageService>();
 
+            Message message = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+            Message message2 = new Message() { Id = 2, FromId = "1", ToId = "2", Text = "Hello Man 2!" };
             List<Message> messages = new List<Message>();
 
-            var idOne = Guid.NewGuid();
-            var idTwo = Guid.NewGuid();
+            messages.Add( message);
+            messages.Add(message2);
 
-         
-
-
-
+            repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(messages);
             MessageController messageController = new MessageController(repository.Object);
 
-            var result = messageController.GetMessages("1", "2", "").Result.Result as OkObjectResult;
+            var messageOkObject = messageController.GetMessages("1", "2", "").Result.Result as OkObjectResult;
+            var result = (List<Message>) messageOkObject.Value;
 
-            
-            Assert.AreEqual(result.StatusCode, 200);
-
-
+            Assert.AreEqual(result.Count, 2);
             
         }
 
@@ -45,20 +42,37 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         {
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
-
-
             Message message = new Message() { Id = 1, FromId = "1", ToId = "2" , Text = "" };
 
             repository.Setup(method => method.Register(message));
             repository.Setup(method => method.Get(1)).ReturnsAsync(message);
             MessageController messageController = new MessageController(repository.Object);
 
-
             var result = messageController.Get(1).Result.Result as OkObjectResult;
 
 
             Assert.AreEqual(result.StatusCode, 200);
 
+        }
+
+        [Test]
+        public  void get_WhenCalled_ReturnTheMessage()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+
+
+            Message message = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+
+            repository.Setup(method => method.Register(message));
+            repository.Setup(method => method.Get(1)).ReturnsAsync(message);
+            MessageController messageController = new MessageController(repository.Object);
+
+
+            var messageObject =  messageController.Get(1).Result.Result as OkObjectResult;
+            Message result2 = (Message) messageObject.Value;
+
+            Assert.AreEqual(result2.Text, "Hello Man!");
+          
         }
     }
 }

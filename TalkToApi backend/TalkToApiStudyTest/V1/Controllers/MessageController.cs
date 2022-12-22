@@ -44,8 +44,8 @@ namespace TalkToApiStudyTest.V1.Controllers
 
         [MapToApiVersion("1.0")]
         [HttpGet("{userOne}/{userTwo}", Name = "GetMessages")]
-        public async Task<ActionResult> GetMessages(string userOne, string userTwo,
-            [FromHeader(Name ="Accept")] string mediaType)
+        public async Task<ActionResult<List<MessageDTO>>> GetMessages(string userOne, string userTwo,
+            [FromHeader(Name ="Accept")] string? mediaType)
 
         {
             if (userOne == userTwo)
@@ -113,7 +113,7 @@ namespace TalkToApiStudyTest.V1.Controllers
         [Authorize]
         [MapToApiVersion("1.0")]
         [HttpPatch("{id}",Name = "ParcialUpdate")]
-         public async Task<ActionResult> PartialUpdate(int id, [FromBody] JsonPatchDocument<Message> jsonPatch,
+         public async Task<ActionResult<MessageDTO>> PartialUpdate(int id, [FromBody] JsonPatchDocument<Message> jsonPatch,
             [FromHeader(Name ="Accept")] string mediaType)
             {
 
@@ -140,5 +140,16 @@ namespace TalkToApiStudyTest.V1.Controllers
                 return Ok(message);
             }
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult<Message>> Get(int id)
+        {
+            var message = _messageRepository.Get(id);
+
+            return Ok(message);
+        }
+
+
     }
 }

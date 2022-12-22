@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using TalkToApiStudyTest.V1.Controllers;
 using TalkToApiStudyTest.V1.Models;
-using TalkToApiStudyTest.V1.Models.dto;
 using TalkToApiStudyTest.V1.Services.Contracts;
 
 namespace TalktoApiTest.TestProject.Mocking.Controllers
@@ -17,23 +16,49 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
     {
 
         [Test]
-      public  void getMessages_WhenCalled_ReturnListOfMessages()
+      public   void getMessages_WhenCalled_ReturnListOfMessages()
         {
             Mock<IMessageService> repository = new  Mock<IMessageService>();
-          MessageController messageController = new MessageController(repository.Object);
 
             List<Message> messages = new List<Message>();
 
-            Message message1 = new Message() { Created = DateTime.UtcNow, FromId = "", ToId = "", Text = "", Id = 1 };
-            Message message2 = new Message() { Created = DateTime.UtcNow, FromId = "", ToId = "", Text = "", Id = 2 };
+            var idOne = Guid.NewGuid();
+            var idTwo = Guid.NewGuid();
 
-            messages.Add(message1);
-            messages.Add(message2);
+         
 
-            repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(messages);
-           
-            Assert.AreEqual( messageController.GetMessages(It.IsAny<string>(), It.IsAny<string>()  , It.IsAny<string>()).Result, messages  as UnprocessableEntityResult);
-           ;
+
+
+            MessageController messageController = new MessageController(repository.Object);
+
+            var result = messageController.GetMessages("1", "2", "").Result.Result as OkObjectResult;
+
+            
+            Assert.AreEqual(result.StatusCode, 200);
+
+
+            
+        }
+
+        [Test]
+        public void get_WhenCalled_ReturnHttpStatus200()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+
+
+
+            Message message = new Message() { Id = 1, FromId = "1", ToId = "2" , Text = "" };
+
+            repository.Setup(method => method.Register(message));
+            repository.Setup(method => method.Get(1)).ReturnsAsync(message);
+            MessageController messageController = new MessageController(repository.Object);
+
+
+            var result = messageController.Get(1).Result.Result as OkObjectResult;
+
+
+            Assert.AreEqual(result.StatusCode, 200);
+
         }
     }
 }

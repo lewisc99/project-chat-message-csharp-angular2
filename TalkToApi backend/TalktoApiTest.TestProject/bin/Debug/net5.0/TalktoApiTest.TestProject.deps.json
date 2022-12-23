@@ -9,6 +9,7 @@
       "TalktoApiTest.TestProject/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.4.4",
+          "Microsoft.AspNet.WebApi.Core": "5.0.0",
           "Microsoft.Extensions.Identity.Core": "5.0.0",
           "Microsoft.NET.Test.Sdk": "16.9.4",
           "Moq": "4.18.3",
@@ -60,6 +61,25 @@
           "lib/netstandard2.1/EntityFramework.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.400.420.21404"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.0.0": {
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.11001.0"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Core/5.0.0": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.0.0"
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.11001.0"
           }
         }
       },
@@ -1815,6 +1835,20 @@
       "sha512": "sha512-yj1+/4tci7Panu3jKDHYizxwVm0Jvm7b7m057b5h4u8NUHGCR8WIWirBTw+8EptRffwftIWPBeIRGNKD1ewEMQ==",
       "path": "entityframework/6.4.4",
       "hashPath": "entityframework.6.4.4.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Client/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OMTp9ot40TZgZxnFO+S0ac0EY5CtQs6KTHkMSHmNFDc+a0tWMCsSBuOG6HoH9+G95wNhEfZrZ20btAsHMlQe7w==",
+      "path": "microsoft.aspnet.webapi.client/5.0.0",
+      "hashPath": "microsoft.aspnet.webapi.client.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Core/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZOVLLtFpSM8nkJopUM9upbJEUkAUS60j6Sj1hDKewHaekWMUnnoMX/i3Ee+7KgxMGk13yxxQRHtSwcjh1JpJ4w==",
+      "path": "microsoft.aspnet.webapi.core/5.0.0",
+      "hashPath": "microsoft.aspnet.webapi.core.5.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",

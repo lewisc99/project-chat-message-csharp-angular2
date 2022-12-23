@@ -37,6 +37,20 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             
         }
 
+
+        [Test]
+        public void getMessages_WhenCalled_ReturnUnprocessableEntity()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+            MessageController messageController = new MessageController(repository.Object);
+
+            var result = messageController.GetMessages("1", "1", "").Result.Result as UnprocessableEntityResult;
+
+            Assert.AreEqual(result.StatusCode, 422);
+
+        }
+
+
         [Test]
         public void get_WhenCalled_ReturnHttpStatus200()
         {
@@ -50,13 +64,13 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
             var result = messageController.Get(1).Result.Result as OkObjectResult;
 
-
             Assert.AreEqual(result.StatusCode, 200);
 
         }
 
-        [Test]
-        public  void get_WhenCalled_ReturnTheMessage()
+
+      [Test]
+        public  void get_WhenCalled_ReturnTheMessageText()
         {
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
@@ -74,5 +88,8 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             Assert.AreEqual(result2.Text, "Hello Man!");
           
         }
+
+      
+
     }
 }

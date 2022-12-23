@@ -53,11 +53,21 @@ namespace TalkToApiStudyTest.V1.Controllers
                 return UnprocessableEntity();
             }
 
-            List<Message> messagesList = await _messageRepository.GetMessages(userOne, userTwo);
+            List<Message> messagesList = new List<Message>();
+
+            try { 
+                 messagesList = await _messageRepository.GetMessages(userOne, userTwo);
+            }
+            catch (Exception e)
+            {
+                return UnprocessableEntity(e.Message);
+            }
 
             if (mediaType == CustomMediaType.Hateoas)
             {
-                List<MessageDTO> messagesDTO = _mapper.Map<List<Message>, List<MessageDTO>>(messagesList);
+                var newMessage = new List<Message>();
+                newMessage = await _messageRepository.GetMessages(userOne, userTwo);
+                List<MessageDTO> messagesDTO = _mapper.Map<List<Message>, List<MessageDTO>>(newMessage);
                 _hubContext.Clients.All.brodcastConnectionId(userOne);
                 ListDTO<MessageDTO> result = new ListDTO<MessageDTO>() { Result = messagesDTO };
                 result.links.Add(new LinkDTO("_self", Url.Link("GetMessages", new { userOne = userOne, userTwo = userTwo }), "GET"));

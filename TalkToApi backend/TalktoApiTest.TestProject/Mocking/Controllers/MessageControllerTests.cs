@@ -39,9 +39,27 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
 
         [Test]
+        public void getMessages_WhenCalled_ThrowException()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+
+            repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).Throws<NullReferenceException>();
+            MessageController messageController = new MessageController(repository.Object);
+
+            var result = messageController.GetMessages("1", "2", "").Result.Result as UnprocessableEntityObjectResult;
+
+           Assert.That(result.StatusCode == 422);
+
+        }
+
+      
+
+        [Test]
         public void getMessages_WhenCalled_ReturnUnprocessableEntity()
         {
             Mock<IMessageService> repository = new Mock<IMessageService>();
+
+
             MessageController messageController = new MessageController(repository.Object);
 
             var result = messageController.GetMessages("1", "1", "").Result.Result as UnprocessableEntityResult;

@@ -10,6 +10,9 @@ import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainMessageComponent } from './components/main-message/main-message.component';
 import { UsersMessagesComponent } from './components/main-message/users-messages/users-messages.component';
 import { AuthGuard } from './shared/auth.guard';
+import { TokenStorageService } from './services/token-storage.service';
+import { MessageService } from './services/message.service';
+import { NotificationHubService } from './services/notificationhub.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { AuthGuard } from './shared/auth.guard';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [UserService, AuthGuard ],
+  providers: [UserService, AuthGuard , TokenStorageService, MessageService, NotificationHubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

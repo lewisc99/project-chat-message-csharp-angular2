@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using TalkToApiStudyTest.V1.Controllers;
 using TalkToApiStudyTest.V1.Models;
+using TalkToApiStudyTest.V1.Models.dto;
 using TalkToApiStudyTest.V1.Services.Contracts;
 
 namespace TalktoApiTest.TestProject.Mocking.Controllers
@@ -106,7 +107,25 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             Assert.AreEqual(result2.Text, "Hello Man!");
           
         }
+            
 
+        [Test]
+        public void post_WhenCalled_UpdateUser()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+
+            MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+            Message messageEntity =  new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+
+            repository.Setup(method => method.Register(messageEntity));
+
+            MessageController messageController = new MessageController(repository.Object);
+            var messageObject = messageController.Register(message,"").Result as OkObjectResult;
+
+          
+
+
+        }
       
 
     }

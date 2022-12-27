@@ -85,7 +85,7 @@ namespace TalkToApiStudyTest.V1.Controllers
         [MapToApiVersion("1.0")]
         [HttpPost(Name ="RegisterMessage")]
         public async Task<ActionResult> Register([FromBody] MessageConnectionId messageConnectionId,
-            [FromHeader(Name ="Accept")] string mediaType)
+            [FromHeader(Name ="Accept")] string? mediaType)
         {
             if(ModelState.IsValid)
             {

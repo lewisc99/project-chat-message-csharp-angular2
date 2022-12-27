@@ -12,7 +12,7 @@ export class MessageService {
 
   constructor(private httpCient:HttpClient, private tokenStorage:TokenStorageService, private notificationHub:NotificationHubService) { }
 
-  private urlDefaultMessage = "https://localhost:44334/api/message/";
+  public urlDefaultMessage = "https://localhost:44334/api/message/";
 
     public getUserMessages(userIdOne:string,userIdTwo:string):Observable<Message[]>
     {

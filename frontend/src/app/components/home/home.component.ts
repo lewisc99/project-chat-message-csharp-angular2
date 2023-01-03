@@ -3,6 +3,7 @@ import { TokenStorageService } from '../../services/token-storage.service';
 import { UserService } from '../../services/user.service';
 import { NotificationHubService } from '../../services/notificationhub.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +21,21 @@ export class HomeComponent implements OnInit {
 
   userIsLogIn()
   {
-    
-    if (!this.TokenStorageService.isTokenValid)
-    {
-      this.tokenIsValid = false;
-    }
-    else
-    {
-      this.tokenIsValid = true;
-    }
+   
+      this.TokenStorageService.isTokenValid.subscribe(
+        (token: any) =>
+         {
+          if (!token)  
+          {
+            this.tokenIsValid = false;
+          }
+          else
+          {
+            this.tokenIsValid = true;
+          }
+         }
+      )
+
   }
 
 

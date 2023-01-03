@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,9 +7,11 @@ import { Injectable } from '@angular/core';
 export class TokenStorageService {
 
   constructor() { 
-    this.isTokenValid =false;
+    this.isTokenValid.next(false);
+    
+
   }
-  public isTokenValid:boolean;
+  public isTokenValid:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private storageToken:Storage = sessionStorage;
 
@@ -16,7 +19,7 @@ export class TokenStorageService {
   {
     this.storageToken.removeItem("token");
     this.storageToken.setItem("token",JSON.stringify(token));
-    this.isTokenValid = true;
+    this.isTokenValid.next(true);
   }
 
   public getToken():string 
@@ -28,8 +31,7 @@ export class TokenStorageService {
     {
         return "";
     }
-    
-    this.isTokenValid = true;
+    this.isTokenValid.next(true);
     return token;
   }
 
@@ -46,7 +48,8 @@ export class TokenStorageService {
   public cleanToken():void
   {
       this.storageToken.removeItem("token");
-      this.isTokenValid = false;
+     this.isTokenValid.next(false);
+      
   }
 
 }

@@ -123,7 +123,7 @@ namespace TalkToApiStudyTest.V1.Controllers
             [FromHeader(Name ="Accept")] string mediaType)
             {
 
-            if (jsonPatch == null)
+            if (jsonPatch.Operations.Count  < 1)
             {
                 return BadRequest();
             }

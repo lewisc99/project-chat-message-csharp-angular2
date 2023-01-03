@@ -111,7 +111,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
 
         [Test]
-        public void put_WhenCalled_PartialUpdateMessage()
+        public void patch_WhenCalled_PartialUpdateMessage()
         {
             //mock the service
             Mock<IMessageService> repository = new Mock<IMessageService>();
@@ -151,10 +151,26 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
             //will check if the object result was updated.
             Assert.AreEqual(result.Text, "ola mundo");
-
         }
 
-       
+        [Test]
+        public void patch_whenCalled_ReturnBadRequest()
+        {
+            Mock<IMessageService> repository = new Mock<IMessageService>();
+            MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+            Message messageEntity = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+            repository.Setup(method => method.Register(messageEntity));
+            repository.Setup(method => method.Get(1)).ReturnsAsync(messageEntity);
+            MessageController messageController = new MessageController(repository.Object, null, null);
+
+
+            JsonPatchDocument<Message> json = new JsonPatchDocument<Message>();
+
+            var result = messageController.PartialUpdate(1, json, "").Result.Result as StatusCodeResult;
+            Assert.AreEqual(result.StatusCode, 400);
+        }
+
+
 
     }
 }

@@ -13,7 +13,6 @@ using TalkToApiStudyTest.V1.Models;
 using TalkToApiStudyTest.V1.Models.dto;
 using TalkToApiStudyTest.V1.Services.Contracts;
 
-
 #pragma warning disable
 namespace TalkToApiStudyTest.V1.Controllers
 {
@@ -29,17 +28,14 @@ namespace TalkToApiStudyTest.V1.Controllers
         private readonly IMapper _mapper;
         private readonly IHubContext<BroadcastHub, IClientHub> _hubContext;
 
-        public MessageController(IMessageService messageRepository, IMapper mapper, IHubContext<BroadcastHub,IClientHub> hubContext)
+        public MessageController(IMessageService? messageRepository, IMapper mapper, IHubContext<BroadcastHub,IClientHub> hubContext)
         {
             _messageRepository = messageRepository;
             _mapper = mapper;
             _hubContext = hubContext;
         }
 
-        public MessageController(IMessageService messageRepository)
-        {
-            _messageRepository = messageRepository;
-        }
+    
 
 
         [MapToApiVersion("1.0")]
@@ -159,7 +155,5 @@ namespace TalkToApiStudyTest.V1.Controllers
 
             return Ok(message);
         }
-
-
     }
 }

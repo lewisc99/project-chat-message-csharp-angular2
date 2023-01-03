@@ -113,25 +113,48 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void put_WhenCalled_PartialUpdateMessage()
         {
+            //mock the service
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
+            //create a mock messageConnectionId user
             MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+
+            //create a mock of message
             Message messageEntity = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
 
+
+            //register a new message
             repository.Setup(method => method.Register(messageEntity));
+            //get the message registry
             repository.Setup(method => method.Get(1)).ReturnsAsync(messageEntity);
+
             MessageController messageController = new MessageController(repository.Object, null, null);
 
+            //call the http method get to check if the messages is register (because of method.Register(messageEntity);
+            var messageObject = messageController.Get(1).Result.Result as OkObjectResult;
 
+            //will get the json Ok() and convert to message
+            Message result = (Message)messageObject.Value;
+
+            //check if the text message saved in the database is "Hello man!"
+            Assert.AreEqual(result.Text, "Hello Man!");
+
+
+            //will mock a JsonPatchDocument or partial update
+            //only the text wil be updated
             JsonPatchDocument<Message> json = new JsonPatchDocument<Message>();
             json.Add( s => s.Text, "ola mundo");
 
+            //will mock a http request to partialUpdate
             var messageUpdated = messageController.PartialUpdate(1, json, "").Result.Result as OkObjectResult;
-            Message result2 = (Message)messageUpdated.Value;
-            Assert.AreEqual(result2.Text, "ola mundo");
+            result = (Message)messageUpdated.Value;
+
+            //will check if the object result was updated.
+            Assert.AreEqual(result.Text, "ola mundo");
 
         }
 
+       
 
     }
 }

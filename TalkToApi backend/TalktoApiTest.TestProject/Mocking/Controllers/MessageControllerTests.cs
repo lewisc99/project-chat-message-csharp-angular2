@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -29,7 +30,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             messages.Add(message2);
 
             repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(messages);
-            MessageController messageController = new MessageController(repository.Object);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
             var messageOkObject = messageController.GetMessages("1", "2", "").Result.Result as OkObjectResult;
             var result = (List<Message>) messageOkObject.Value;
@@ -45,7 +46,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
             repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).Throws<NullReferenceException>();
-            MessageController messageController = new MessageController(repository.Object);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
             var result = messageController.GetMessages("1", "2", "").Result.Result as UnprocessableEntityObjectResult;
 
@@ -61,7 +62,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
 
-            MessageController messageController = new MessageController(repository.Object);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
             var result = messageController.GetMessages("1", "1", "").Result.Result as UnprocessableEntityResult;
 
@@ -79,7 +80,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
             repository.Setup(method => method.Register(message));
             repository.Setup(method => method.Get(1)).ReturnsAsync(message);
-            MessageController messageController = new MessageController(repository.Object);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
             var result = messageController.Get(1).Result.Result as OkObjectResult;
 
@@ -98,7 +99,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
 
             repository.Setup(method => method.Register(message));
             repository.Setup(method => method.Get(1)).ReturnsAsync(message);
-            MessageController messageController = new MessageController(repository.Object);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
 
             var messageObject =  messageController.Get(1).Result.Result as OkObjectResult;
@@ -107,26 +108,30 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             Assert.AreEqual(result2.Text, "Hello Man!");
           
         }
-            
+
 
         [Test]
-        public void post_WhenCalled_UpdateUser()
+        public void put_WhenCalled_PartialUpdateMessage()
         {
             Mock<IMessageService> repository = new Mock<IMessageService>();
 
             MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
-            Message messageEntity =  new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
+            Message messageEntity = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
 
             repository.Setup(method => method.Register(messageEntity));
+            repository.Setup(method => method.Get(1)).ReturnsAsync(messageEntity);
+            MessageController messageController = new MessageController(repository.Object, null, null);
 
-            MessageController messageController = new MessageController(repository.Object);
-            var messageObject = messageController.Register(message,"").Result as OkObjectResult;
 
-          
+            JsonPatchDocument<Message> json = new JsonPatchDocument<Message>();
+            json.Add( s => s.Text, "ola mundo");
 
+            var messageUpdated = messageController.PartialUpdate(1, json, "").Result.Result as OkObjectResult;
+            Message result2 = (Message)messageUpdated.Value;
+            Assert.AreEqual(result2.Text, "ola mundo");
 
         }
-      
+
 
     }
 }

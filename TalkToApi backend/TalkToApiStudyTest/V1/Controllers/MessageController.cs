@@ -28,7 +28,7 @@ namespace TalkToApiStudyTest.V1.Controllers
         private readonly IMapper _mapper;
         private readonly IHubContext<BroadcastHub, IClientHub> _hubContext;
 
-        public MessageController(IMessageService? messageRepository, IMapper mapper, IHubContext<BroadcastHub, IClientHub> hubContext)
+        public MessageController(IMessageService? messageRepository, IMapper mapper, IHubContext<BroadcastHub, IClientHub>? hubContext)
         {
             _messageRepository = messageRepository;
             _mapper = mapper;

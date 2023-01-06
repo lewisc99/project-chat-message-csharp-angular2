@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -110,6 +111,7 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         }
 
 
+
         [Test]
         public void patch_WhenCalled_PartialUpdateMessage()
         {
@@ -152,6 +154,9 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             //will check if the object result was updated.
             Assert.AreEqual(result.Text, "ola mundo");
         }
+
+
+
 
         [Test]
         public void patch_whenCalled_ReturnBadRequest()

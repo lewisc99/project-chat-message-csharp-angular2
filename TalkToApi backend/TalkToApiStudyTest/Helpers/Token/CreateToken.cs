@@ -16,7 +16,7 @@ namespace TalkToApiStudyTest.Helpers.Token
         public  static TokenDTO BuildToken(ApplicationUser usuario)
         {
 
-            if (usuario == null)
+            if (usuario == null || usuario.Email == null || ( usuario.Id == null || usuario.Id.Length < 1))
             {
                 throw new ArgumentNullException();
             }

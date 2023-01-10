@@ -15,6 +15,11 @@ namespace TalkToApiStudyTest.Helpers.Token
 
         public  static TokenDTO BuildToken(ApplicationUser usuario)
         {
+
+            if (usuario == null)
+            {
+                throw new ArgumentNullException();
+            }
             var claims = new[]
             {
               new Claim(JwtRegisteredClaimNames.Email, usuario.Email),

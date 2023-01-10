@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -68,7 +67,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             var result = messageController.GetMessages("1", "1", "").Result.Result as UnprocessableEntityResult;
 
             Assert.AreEqual(result.StatusCode, 422);
-
         }
 
 
@@ -174,8 +172,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
             var result = messageController.PartialUpdate(1, json, "").Result.Result as StatusCodeResult;
             Assert.AreEqual(result.StatusCode, 400);
         }
-
-
 
     }
 }

@@ -24,7 +24,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         public void beforeEach()
         {
             repository = new Mock<IMessageService>();
-
         }
 
         [Test]

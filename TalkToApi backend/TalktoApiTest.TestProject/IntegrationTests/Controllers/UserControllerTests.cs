@@ -1,7 +1,7 @@
 ﻿
 using NUnit.Framework;
 
-namespace TalktoApiTest.TestProject.Mocking.Controllers
+namespace TalktoApiTest.TestProject.IntegrationTests.Controllers
 {
 
     [TestFixture]

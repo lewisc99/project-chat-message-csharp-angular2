@@ -17,10 +17,19 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
    public class MessageControllerTests
     {
 
+
+        private Mock<IMessageService> repository;
+
+        [SetUp]
+        public void beforeEach()
+        {
+            repository = new Mock<IMessageService>();
+
+        }
+
         [Test]
       public   void getMessages_WhenCalled_ReturnListOfMessages()
         {
-            Mock<IMessageService> repository = new  Mock<IMessageService>();
 
             Message message = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
             Message message2 = new Message() { Id = 2, FromId = "1", ToId = "2", Text = "Hello Man 2!" };
@@ -43,7 +52,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void getMessages_WhenCalled_ThrowException()
         {
-            Mock<IMessageService> repository = new Mock<IMessageService>();
 
             repository.Setup(method => method.GetMessages(It.IsAny<string>(), It.IsAny<string>())).Throws<NullReferenceException>();
             MessageController messageController = new MessageController(repository.Object, null, null);
@@ -59,7 +67,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void getMessages_WhenCalled_ReturnUnprocessableEntity()
         {
-            Mock<IMessageService> repository = new Mock<IMessageService>();
 
 
             MessageController messageController = new MessageController(repository.Object, null, null);
@@ -73,7 +80,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void get_WhenCalled_ReturnHttpStatus200()
         {
-            Mock<IMessageService> repository = new Mock<IMessageService>();
 
             Message message = new Message() { Id = 1, FromId = "1", ToId = "2" , Text = "" };
 
@@ -91,7 +97,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
       [Test]
         public  void get_WhenCalled_ReturnTheMessageText()
         {
-            Mock<IMessageService> repository = new Mock<IMessageService>();
 
 
             Message message = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
@@ -113,8 +118,6 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void patch_WhenCalled_PartialUpdateMessage()
         {
-            //mock the service
-            Mock<IMessageService> repository = new Mock<IMessageService>();
 
             //create a mock messageConnectionId user
             MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
@@ -159,14 +162,11 @@ namespace TalktoApiTest.TestProject.Mocking.Controllers
         [Test]
         public void patch_whenCalled_ReturnBadRequest()
         {
-            Mock<IMessageService> repository = new Mock<IMessageService>();
             MessageConnectionId message = new MessageConnectionId() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
             Message messageEntity = new Message() { Id = 1, FromId = "1", ToId = "2", Text = "Hello Man!" };
             repository.Setup(method => method.Register(messageEntity));
             repository.Setup(method => method.Get(1)).ReturnsAsync(messageEntity);
             MessageController messageController = new MessageController(repository.Object, null, null);
-
-
             JsonPatchDocument<Message> json = new JsonPatchDocument<Message>();
 
             var result = messageController.PartialUpdate(1, json, "").Result.Result as StatusCodeResult;

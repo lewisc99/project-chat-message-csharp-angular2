@@ -16,12 +16,23 @@ namespace TalktoApiTest.TestProject.UnitTesting.Token
         [Test]
         public void buildToken_WhenCalled_ReturnTokenDto()
         {
-
             ApplicationUser user = new ApplicationUser();
             user = new ApplicationUser() { Email = "example@gmail.com", FullName = "Lewis", Id = "a1978bad-bb4f-426d-9a7e-7579d6226639" };
-           TokenDTO token = CreateToken.BuildToken(user);
+            TokenDTO token = CreateToken.BuildToken(user);
 
             Assert.NotNull(token);
+        }
+
+        [Test]
+        public void buildToken_WhenCalled_ReturnTokenDtoWithExpirationDateTwoHoursAfterNow()
+        {
+            ApplicationUser user = new ApplicationUser();
+            user = new ApplicationUser() { Email = "example@gmail.com", FullName = "Lewis", Id = "a1978bad-bb4f-426d-9a7e-7579d6226639" };
+            TokenDTO token = CreateToken.BuildToken(user);
+            var expected = DateTime.UtcNow.AddHours(1).Hour;
+            
+            Assert.NotNull(token);
+            Assert.AreEqual(expected, token.Expiration.Hour);
 
         }
 
@@ -29,7 +40,6 @@ namespace TalktoApiTest.TestProject.UnitTesting.Token
         public void buildToken_WhenCalled_AddEmptyApplicationThrowsArgumentNullException()
         {
             ApplicationUser user = new ApplicationUser();
-
             Assert.Throws<ArgumentNullException>(() =>  CreateToken.BuildToken(user));
         }
 

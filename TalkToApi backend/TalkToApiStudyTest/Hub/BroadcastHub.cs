@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 
 namespace TalkToApiStudyTest.Hub
+
+#pragma warning disable
 {
     public class BroadcastHub :Hub<IClientHub>
     {

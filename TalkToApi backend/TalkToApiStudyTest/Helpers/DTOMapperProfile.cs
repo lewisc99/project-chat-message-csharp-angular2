@@ -4,6 +4,8 @@ using TalkToApiStudyTest.V1.Models.dto;
 
 namespace TalkToApiStudyTest.Helpers
 {
+#pragma warning disable
+
     public class DTOMapperProfile: Profile
     {
         public DTOMapperProfile()

@@ -128,7 +128,7 @@ namespace TalkToApiStudyTest
                     cfg.ReportApiVersions = true;
                     cfg.ApiVersionReader = new HeaderApiVersionReader("api-version");
                     cfg.AssumeDefaultVersionWhenUnspecified = true;
-                    cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+                    cfg.DefaultApiVersion = new ApiVersion(1, 0);
                 });
 
             services.AddVersionedApiExplorer(options =>

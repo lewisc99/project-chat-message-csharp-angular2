@@ -17,11 +17,11 @@ using TalkToApiStudyTest.V1.Services.Contracts;
 namespace TalkToApiStudyTest.V1.Controllers
 {
     [ApiController]
-    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [Produces(CustomMediaType.Hateoas,CustomMediaType.returnXML, CustomMediaType.returnJSON)]
     [EnableCors]
+    [Authorize]
     public class MessageController: ControllerBase
     {
         private IMessageService _messageRepository;
@@ -35,8 +35,13 @@ namespace TalkToApiStudyTest.V1.Controllers
             _hubContext = hubContext;
         }
 
-    
-
+         [HttpGet("edit")]
+         [MapToApiVersion("1.0")]
+         [AllowAnonymous]
+         public ActionResult<string> get()
+        {
+            return  Ok("ola lewis");
+        }
 
         [MapToApiVersion("1.0")]
         [HttpGet("{userOne}/{userTwo}", Name = "GetMessages")]

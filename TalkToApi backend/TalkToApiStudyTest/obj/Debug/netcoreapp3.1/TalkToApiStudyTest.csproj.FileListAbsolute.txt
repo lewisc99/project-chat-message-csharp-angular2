@@ -319,6 +319,7 @@ D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi ba
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.csprojAssemblyReference.cache
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.GeneratedMSBuildEditorConfig.editorconfig
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.AssemblyInfoInputs.cache
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.AssemblyInfo.cs
@@ -326,11 +327,10 @@ D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi ba
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.MvcApplicationPartsAssemblyInfo.cs
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.MvcApplicationPartsAssemblyInfo.cache
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\staticwebassets\TalkToApiStudyTest.StaticWebAssets.Manifest.cache
+D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\staticwebassets\TalkToApiStudyTest.StaticWebAssets.xml
+D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\scopedcss\bundle\TalkToApiStudyTest.styles.css
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.RazorTargetAssemblyInfo.cache
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.csproj.CopyComplete
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.dll
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.pdb
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.genruntimeconfig.cache
-D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\TalkToApiStudyTest.csprojAssemblyReference.cache
-D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\staticwebassets\TalkToApiStudyTest.StaticWebAssets.xml
-D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalkToApiStudyTest\obj\Debug\netcoreapp3.1\scopedcss\bundle\TalkToApiStudyTest.styles.css

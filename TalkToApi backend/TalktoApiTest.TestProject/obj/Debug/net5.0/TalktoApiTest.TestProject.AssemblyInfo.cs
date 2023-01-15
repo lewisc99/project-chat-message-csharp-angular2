@@ -11,6 +11,8 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("TalkToApiStudyTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\arquivos\\programation\\workspaceCsharpAngular\\month8\\taltomessage\\TalkToApi bac" +
+    "kend\\TalkToApiStudyTest", "TalkToApiStudyTest.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TalktoApiTest.TestProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

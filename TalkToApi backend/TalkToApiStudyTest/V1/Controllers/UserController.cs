@@ -69,6 +69,7 @@ namespace TalkToApiStudyTest.V1.Controllers
 
         [HttpGet("{id}", Name = "Get")]
         [MapToApiVersion("1.0")]
+        [AllowAnonymous]
         public async Task<ActionResult> Get(string id)
         {
             ApplicationUser userById = await _userRepository.Get(id);

@@ -449,3 +449,4 @@ D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi ba
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalktoApiTest.TestProject\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Testing.dll
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalktoApiTest.TestProject\bin\Debug\net5.0\Microsoft.AspNetCore.TestHost.dll
 D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalktoApiTest.TestProject\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\arquivos\programation\workspaceCsharpAngular\month8\taltomessage\TalkToApi backend\TalktoApiTest.TestProject\bin\Debug\net5.0\BCrypt.Net-Next.dll

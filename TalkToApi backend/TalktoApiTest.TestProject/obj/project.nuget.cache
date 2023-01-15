@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "kU3b92oPQr4mEyJ+alCIofwLFNVvw0qy7kFlgM3pUhHxg06Zo5Vc1yF1luUG8DO/TfDsEcRaTCx5o7eM0/P49g==",
+  "dgSpecHash": "rj+lZkcBvTyOH9e4ecdhWaFU+rESPYV8C9AWJwgvu7M41KJZkNbmgaTRRmpatWWIwmJSVVbWNb+0ElKsH/N4ow==",
   "success": true,
   "projectFilePath": "D:\\arquivos\\programation\\workspaceCsharpAngular\\month8\\taltomessage\\TalkToApi backend\\TalktoApiTest.TestProject\\TalktoApiTest.TestProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pichau\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\Pichau\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\Pichau\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

@@ -8,6 +8,10 @@ using TalkToApiStudyTest.Database;
 using TalktoApiTest.TestProject.IntegrationTests.config;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.TestHost;
+using TalkToApiStudyTest;
+using System;
 
 namespace TalktoApiTest.TestProject.IntegrationTests.Controllers
 {
@@ -29,10 +33,39 @@ namespace TalktoApiTest.TestProject.IntegrationTests.Controllers
                     options.UseInMemoryDatabase("inMemoryDbForTesting");
 
                 });
-                services.AddTransient<DatabaseSeeder>();
-            });
 
-            builder.UseEnvironment("Development");
+                var sp = services.BuildServiceProvider();
+
+                using (var scope = sp.CreateScope())
+                {
+                    var scopedServices = scope.ServiceProvider;
+                    var db = scopedServices.GetRequiredService<TalkToContext>();
+                    var logger = scopedServices
+                        .GetRequiredService<ILogger<CustomWebApplicationFactory<Program>>>();
+
+                    db.Database.EnsureDeleted();
+
+                    db.Database.EnsureCreated();
+
+                    try
+                    {
+                        DatabaseSeeder.Seed(db);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "An error occurred seeding the " +
+                                            "database with test messages. Error: {Message}", ex.Message);
+                    }
+                }
+
+
+            }).ConfigureAppConfiguration((hostContext, configApp) =>
+            {
+                var env = hostContext.HostingEnvironment;
+                configApp.AddJsonFile("appsettings.json", optional: true);
+                configApp.AddEnvironmentVariables();
+
+            });
 
         }
 

@@ -7,36 +7,20 @@ using TalkToApiStudyTest.V1.Models;
 
 namespace TalktoApiTest.TestProject.IntegrationTests.config
 {
-   public class DatabaseSeeder
+   public static class DatabaseSeeder
     {
 
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly TalkToContext _context;
 
-        public DatabaseSeeder(TalkToContext context, UserManager<ApplicationUser> userManager)
+        public static async Task Seed(TalkToContext db)
         {
-            _context = context;
-            _userManager = userManager;
+            ApplicationUser user = new ApplicationUser();
+            user.Email = "lewiscarlos@gmail.com";
+            user.Id = "e3169bc6-f433-4f97-9aed-93027cec38e0";
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword("vida376");
+            user.UserName = "lewis";
+            db.Users.Add(user);
+            db.SaveChangesAsync();
         }
-
-        public async Task Seed()
-        {
-            //// Add all the predefined profiles using the predefined password
-            //foreach (var profile in PredefinedData.Profiles)
-            //{
-            //    await _userManager.CreateAsync(profile, PredefinedData.Password);
-            //    // Set the AuthorId navigation property
-            //    if (profile.Email == "author@test.com")
-            //    {
-            //        PredefinedData.Articles.ToList().ForEach(a => a.AuthorId = profile.Id);
-            //    }
-            //}
-
-            //// Add all the predefined articles
-            //_context.Article.AddRange(PredefinedData.Articles);
-            //_context.SaveChanges();
-        }
-
 
     }
 }

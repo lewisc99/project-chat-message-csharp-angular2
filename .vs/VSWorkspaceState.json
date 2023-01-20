@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\frontend\\src",
-    "\\TalkToApi backend"
+    "\\frontend",
+    "\\TalkToApi backend",
+    "\\TalkToApi backend\\TalkToApiStudyTest",
+    "\\TalkToApi backend\\TalkToApiStudyTest\\V1"
   ],
-  "SelectedNode": "\\TalkToApi backend\\TalkToApiStudyTest.sln",
+  "SelectedNode": "\\TalkToApi backend\\TalkToApiStudyTest\\V1\\Models",
   "PreviewInSolutionExplorer": false
 }

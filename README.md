@@ -23,6 +23,9 @@
 
 
 ## 🖼 Screenshot APPLICATION SCREENS <br/>
+<p>Whole application</p><img src="images/chat-gift.gif">
+<br/>
+<br/>
 <p>Chat-zoom-page</p><img src="images/chat-view.JPG">
 <br/>
 <br/>

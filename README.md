@@ -1,5 +1,4 @@
 ﻿## 🖼 ﻿ C# WEB API AND ANGULAR - REAL-TIME CHAT MESSAGE API <br/>
-<hr>
 <br/>
 <h2>Description English</h2>
 <p>This project i learnt a lot about how API works the Status code to return, 

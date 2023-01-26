@@ -1,4 +1,17 @@
-﻿﻿# C# WEB API AND ANGULAR - REAL-TIME CHAT MESSAGE API
+﻿## 🖼 ﻿ C# WEB API AND ANGULAR - REAL-TIME CHAT MESSAGE API <br/>
+<hr>
+<br/>
+<h2>Description English</h2>
+<p>This project i learnt a lot about how API works the Status code to return, 
+how to structure a project and this project you can send a receive in real time a message to another user
+each user has own credentials, using Identity and JWT Token, you can Login and Logout , the frontend 
+was used Angular 2 using Advanced patterns and techniques to implement a lightweight code and clean</p>
+<hr>
+<h2>Descrição Português</h2>
+<p>Neste projeto aprendi muito sobre como a API funciona o código de status para retornar,
+como estruturar um projeto e nesse projeto voce pode enviar um receber em tempo real uma mensagem para outro usuario
+cada usuário possui credenciais próprias, usando identidade e token JWT, você pode fazer login e logout, o frontend
+foi usado Angular 2 usando padrões e técnicas avançadas para implementar um código leve e limpo. </p>
 <hr>
 <br/>
 ## 🚀 Tech Used<br/>

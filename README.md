@@ -1,23 +1,15 @@
-﻿## 🖼 ﻿ C# WEB API AND ANGULAR - REAL-TIME CHAT MESSAGE API <br/>
+﻿## 🖼 ﻿ C# Real Time Chat Message using C# and Angular 2 <br/>
 <br/>
 <h2>Description English</h2>
-<p>This project i learnt a lot about how API works the Status code to return, 
-how to structure a project and this project you can send a receive in real time a message to another user
-each user has own credentials, using Identity and JWT Token, you can Login and Logout , the frontend 
-was used Angular 2 using Advanced patterns and techniques to implement a lightweight code and clean</p>
+<p>This project provided me with a great deal of learning about how an API works, as well as the importance of using proper status codes to return accurate information to users. Furthermore, I was able to explore how to structure a project that uses WebSocket to send and receive messages in real time between users, with each one having their own credentials, implemented through the use of Identity and JWT Token for authentication and authorization. The frontend was developed using Angular 2, following standards and advanced techniques to ensure the implementation of a light and clean code. With this project, it was possible to improve technical skills in web programming. </p>
 <hr>
 <h2>Descrição Português</h2>
-<p>Neste projeto aprendi muito sobre como a API funciona o código de status para retornar,
-como estruturar um projeto e nesse projeto voce pode enviar um receber em tempo real uma mensagem para outro usuario
-cada usuário possui credenciais próprias, usando identidade e token JWT, você pode fazer login e logout, o frontend
-foi usado Angular 2 usando padrões e técnicas avançadas para implementar um código leve e limpo. </p>
+<p>Este projeto me proporcionou um grande aprendizado sobre o funcionamento de uma API, bem como a importância do uso de códigos de status adequados para retornar informações precisas aos usuários. Além disso, pude explorar como estruturar um projeto que utiliza WebSocket para enviar e receber mensagens em tempo real entre os usuários, com cada um possuindo suas próprias credenciais, implementadas através do uso de Identidade e Token JWT para autenticação e autorização. O frontend foi desenvolvido utilizando Angular 2, seguindo padrões e técnicas avançadas para garantir a implementação de um código leve e limpo. Com esse projeto, foi possível aprimorar as habilidades técnicas em programação web. </p>
+
 <hr>
 <br/>
 ## 🚀 Tech Used<br/>
 <br/>
-
-
-
 - c# Web API<br/>
 - Microsoft SQL Server <br/>
 - HTML and CSS typescript<br/>

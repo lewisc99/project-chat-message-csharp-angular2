@@ -1,4 +1,4 @@
-﻿## 🖼 ﻿ C# Real Time Chat Message using C# and Angular 2 <br/>
+<h1>## 🖼 ﻿ C# Real Time Chat Message using C# and Angular 2 </h1><br/>
 <br/>
 <h2>Description English</h2>
 <p>This project provided me with a great deal of learning about how an API works, as well as the importance of using proper status codes to return accurate information to users. Furthermore, I was able to explore how to structure a project that uses WebSocket to send and receive messages in real time between users, with each one having their own credentials, implemented through the use of Identity and JWT Token for authentication and authorization. The frontend was developed using Angular 2, following standards and advanced techniques to ensure the implementation of a light and clean code. With this project, it was possible to improve technical skills in web programming. </p>

@@ -27,13 +27,13 @@
 
 
 ## 🖼 Screenshot APPLICATION SCREENS <br/>
-<p>Whole application</p><img src="images/chat-gift.gif">
+<p>Whole application - How to Run</p><img src="images/chat.gif">
 <br/>
 <br/>
-<p>Chat-zoom-page</p><img src="images/chat-view.JPG">
+<p>Chat zoom page</p><img src="images/chat-view.JPG">
 <br/>
 <br/>
-<p>chat-screen-page</p><img src="images/chat-whole-page.JPG">
+<p>chat screen page</p><img src="images/chat-whole-page.JPG">
 <br/>
 <br/>
 <p>Login Page</p><img src="images/login-page.JPG">
@@ -48,7 +48,7 @@
 <p>Swagger</p><img src="images/swagger.JPG">
 <br/>
 <br/>
-<p>backend-page</p><img src="images/tests.JPG">
+<p>Backend page</p><img src="images/tests.JPG">
 <br/>
 <br/>
 <p>Frontend</p><img src="images/front-end.JPG">

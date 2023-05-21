@@ -25,9 +25,29 @@
 <br/>
 <hr>
 
+<h2>How to Run the Application</h2>
+<p>In the Backend appsettings.json change the connection String Source to your SQL Server Server name</p>
+```{
+  "ConnectionStrings": {
+    "DefaultConnection": "Password=123456;Persist Security Info=True;User ID=sa;Initial Catalog=TalkToApiStudy;Data Source='DESKTOP-PCE1A1P\\SQLEXPRESS;'"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
+<br/>
+<p>Then add the Migration, and Update the Database, will create a table called dbo.aspNetUsers so create a new User, then run the Backend Application</p>
+<p>And in the frontEnd first in the source App Folder run in the terminal 'npm install' to Install the Node_Modules then 'ng serve' to run the application so that's all.</p>
+<br/></br>
 
 ## 🖼 Screenshot APPLICATION SCREENS <br/>
-<p>Whole application - How to Run</p><img src="images/chat.gif">
+<p>Whole application - How to Run Video</p><img src="images/chat.gif">
 <br/>
 <br/>
 <p>Chat zoom page</p><img src="images/chat-view.JPG">

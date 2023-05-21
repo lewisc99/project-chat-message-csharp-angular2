@@ -7,6 +7,6 @@
     "\\TalktoApiTest.TestProject\\Mocking",
     "\\TalktoApiTest.TestProject\\Mocking\\Services"
   ],
-  "SelectedNode": "\\TalkToApiStudyTest.sln",
+  "SelectedNode": "\\TalktoApiTest.TestProject\\Mocking\\Services\\MessageRepositoryTests.cs",
   "PreviewInSolutionExplorer": false
 }

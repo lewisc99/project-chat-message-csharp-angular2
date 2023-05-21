@@ -43,6 +43,45 @@ namespace TalkToApiStudyTest
         {
 
 
+        services.AddDbContext<TalkToContext>(
+                    options =>
+                    {
+                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                    });
+
+                services.AddIdentity<ApplicationUser, IdentityRole>(
+                    config =>
+                    {
+                        config.Password.RequireNonAlphanumeric = false;
+                        config.Password.RequireUppercase = false;
+                    }
+                            
+                    ) 
+                    .AddEntityFrameworkStores<TalkToContext>()
+                    .AddDefaultTokenProviders();
+
+
+                services.AddScoped<IUserRepository, UserRepository>();
+                services.AddScoped<ITokenRepository, TokenRepository>();
+                services.AddScoped<IMessageRepository, MessageRepository>();
+
+
+                services.AddScoped<IUserService, UserService>();
+                services.AddScoped<ITokenService, TokenService>();
+                services.AddScoped<IMessageService, MessageService>();
+
+                services.AddControllers(config =>
+                {
+                    config.ReturnHttpNotAcceptable = true;
+                    config.InputFormatters.Add(new XmlSerializerInputFormatter(config));
+                    config.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                }).AddNewtonsoftJson(
+                    opt =>
+                    {
+                        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                        opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    });
+
             services.AddCors(
                 cfg =>
                 {
@@ -56,52 +95,11 @@ namespace TalkToApiStudyTest
                     });
                 });
 
-            services.AddDbContext<TalkToContext>(options => options.UseSqlServer
-            (Configuration.GetConnectionString("DefaultConnection")));
-
             services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;
             });
-
-            services.AddDbContext<TalkToContext>(
-                options =>
-                {
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                });
-
-            services.AddIdentity<ApplicationUser, IdentityRole>(
-                config =>
-                {
-                    config.Password.RequireNonAlphanumeric = false;
-                    config.Password.RequireUppercase = false;
-                }
-                           
-                ) 
-                .AddEntityFrameworkStores<TalkToContext>()
-                .AddDefaultTokenProviders();
-
-
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITokenRepository, TokenRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
-
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IMessageService, MessageService>();
-
-            services.AddControllers(config =>
-            {
-                config.ReturnHttpNotAcceptable = true;
-                config.InputFormatters.Add(new XmlSerializerInputFormatter(config));
-                config.OutputFormatters.Add(new XmlSerializerOutputFormatter());
-            }).AddNewtonsoftJson(
-                opt =>
-                {
-                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                });
+       
 
             services.AddAuthentication(options =>
             {

@@ -12,7 +12,6 @@ namespace TalktoApiTest.TestProject.UnitTesting.Token
     class CreateTokenTests
     {
 
-
         [Test]
         public void buildToken_WhenCalled_ReturnTokenDto()
         {
